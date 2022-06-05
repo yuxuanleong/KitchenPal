@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        TEST FOR PROFILE PAGE
+//        Intent intent = new Intent(this, Profile.class);
+//        startActivity(intent);
+//        finish();
+
         tvUsername = findViewById(R.id.showUsername);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
