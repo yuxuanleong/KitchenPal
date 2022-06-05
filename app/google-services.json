@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "605678844479",
+    "firebase_url": "https://kitchenpal-a0cda-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kitchenpal-a0cda",
+    "storage_bucket": "kitchenpal-a0cda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605678844479:android:8737e2c75af9a65421168a",
+        "android_client_info": {
+          "package_name": "com.example.kitchenpal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605678844479-280eb83qo53c21i9q92irfm9od8lh8p2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBfQvfrTG8LhR396KEI2MyzMAJD9-f3zU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605678844479-280eb83qo53c21i9q92irfm9od8lh8p2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
