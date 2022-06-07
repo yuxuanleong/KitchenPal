@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.models.ProfileVerModel;
+import com.example.kitchenpal.models.ProfileFavModel;
 
 import java.util.List;
 
 public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.ViewHolder> {
 
     Context context;
-    List<ProfileVerModel> list;
+    List<ProfileFavModel> list;
 
-    public ProfileFavAdapter(Context context, List<ProfileVerModel> list) {
+    public ProfileFavAdapter(Context context, List<ProfileFavModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -39,7 +39,7 @@ public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

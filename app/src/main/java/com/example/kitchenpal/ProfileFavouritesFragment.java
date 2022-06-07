@@ -1,27 +1,26 @@
 package com.example.kitchenpal;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.kitchenpal.adapters.ProfileFavAdapter;
-import com.example.kitchenpal.models.ProfileVerModel;
+import com.example.kitchenpal.models.ProfileFavModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link profileFavourites} factory method to
+ * Use the {@link ProfileFavouritesFragment} factory method to
  * create an instance of this fragment.
  */
-public class profileFavourites extends Fragment {
+public class ProfileFavouritesFragment extends Fragment {
 //
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -30,9 +29,9 @@ public class profileFavourites extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 //
-//    public profileFavourites() {
-//        // Required empty public constructor
-//    }
+    public ProfileFavouritesFragment() {
+        // Required empty public constructor
+    }
 //
 //    /**
 //     * Use this factory method to create a new instance of
@@ -60,7 +59,7 @@ public class profileFavourites extends Fragment {
 //        }
 //    }
         RecyclerView profileVerticalRec;
-        List<ProfileVerModel> profileVerNodeList;
+        List<ProfileFavModel> profileVerNodeList;
         ProfileFavAdapter profileFavAdapter;
 
     @Override
@@ -71,9 +70,9 @@ public class profileFavourites extends Fragment {
 
         profileVerticalRec = root.findViewById(R.id.profile_fav_rec);
         profileVerNodeList = new ArrayList<>();
-        profileVerNodeList.add(new ProfileVerModel(R.drawable.pizza, "Pizza"));
-        profileVerNodeList.add(new ProfileVerModel(R.drawable.burger, "Burger"));
-        profileVerNodeList.add(new ProfileVerModel(R.drawable.fries, "Fries"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "Pizza"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "Burger"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "Fries"));
 
         profileFavAdapter = new ProfileFavAdapter(getActivity(), profileVerNodeList);
         profileVerticalRec.setAdapter(profileFavAdapter);
@@ -81,6 +80,6 @@ public class profileFavourites extends Fragment {
         profileVerticalRec.setHasFixedSize(true);
         profileVerticalRec.setNestedScrollingEnabled(false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_favourites, container, false);
+        return root;
     }
 }

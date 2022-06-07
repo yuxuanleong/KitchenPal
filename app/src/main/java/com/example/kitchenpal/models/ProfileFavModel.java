@@ -1,11 +1,11 @@
 package com.example.kitchenpal.models;
 
-public class ProfileVerModel {
+public class ProfileFavModel {
 
     int image;
     String name;
 
-    public ProfileVerModel(int image, String name) {
+    public ProfileFavModel(int image, String name) {
         this.image = image;
         this.name = name;
     }
