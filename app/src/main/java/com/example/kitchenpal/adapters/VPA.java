@@ -19,10 +19,9 @@ public class VPA extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0:
-                return new ProfileFavouritesFragment();
             case 1:
                 return new ProfileMyRecipesFragment();
+            case 0:
             default:
                 return new ProfileFavouritesFragment();
         }

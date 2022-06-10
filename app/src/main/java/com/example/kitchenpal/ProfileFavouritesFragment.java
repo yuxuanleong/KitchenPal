@@ -70,9 +70,17 @@ public class ProfileFavouritesFragment extends Fragment {
 
         profileVerticalRec = root.findViewById(R.id.profile_fav_rec);
         profileVerNodeList = new ArrayList<>();
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "Pizza"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "Burger"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "Fries"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 1"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 2"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 3"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 4"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
+        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "END"));
 
         profileFavAdapter = new ProfileFavAdapter(getActivity(), profileVerNodeList);
         profileVerticalRec.setAdapter(profileFavAdapter);
