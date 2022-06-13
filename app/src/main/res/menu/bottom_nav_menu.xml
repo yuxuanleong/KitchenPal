@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Recipes"
-        android:icon="@drawable/cake_icon"
+    <item android:title="RECIPES"
+        android:icon="@drawable/ic_recipe_svgrepo_com"
         android:id="@+id/recipes_nav"/>
-    <item android:title="Pantry"
+    <item android:title="PANTRY"
         android:id="@+id/pantry_nav"
         android:icon="@drawable/ic_baseline_brunch_dining_24"/>
-    <item android:title="Profile"
+    <item android:title="PROFILE"
         android:icon="@drawable/person_icon"
         android:id="@+id/profile_nav"/>
 </menu>

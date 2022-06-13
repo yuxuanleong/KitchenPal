@@ -55,12 +55,14 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favourites" />
+            android:text="Favourites"
+            android:textColor="@color/green"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Recipes" />
+            android:text="My Recipes"
+            android:textColor="@color/green"/>
 
     </com.google.android.material.tabs.TabLayout>
 
