@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/drawable/ic_baseline_brunch_dining_24.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/drawable/ic_launcher_background.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/drawable/ic_recipe_svgrepo_com.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/activity_profile.xml" value="0.2759259259259259" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/fragment_profile.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/fragment_profile_favourites.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/fragment_profile_my_recipes.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/fragment_recipes.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/grid_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/KitchenPal/app/src/main/res/layout/profile_favourites_items.xml" value="0.264" />
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/drawable/cake_icon.xml" value="0.261" />
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/drawable/ic_recipe_svgrepo_com.xml" value="0.261" />
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/drawable/recipes_logo.xml" value="0.261" />
