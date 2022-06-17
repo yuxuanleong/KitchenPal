@@ -17,21 +17,23 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFavouritesFragment} factory method to
+ *
  * create an instance of this fragment.
  */
 public class ProfileFavouritesFragment extends Fragment {
-//
+
+//    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
 //
+//    // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
 //
-    public ProfileFavouritesFragment() {
-        // Required empty public constructor
-    }
+//    public ProfileFavouritesFragment() {
+//        // Required empty public constructor
+//    }
 //
 //    /**
 //     * Use this factory method to create a new instance of
@@ -39,10 +41,11 @@ public class ProfileFavouritesFragment extends Fragment {
 //     *
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
-//     * @return A new instance of fragment profileFavourites.
+//     * @return A new instance of fragment ProfileFavouritesFragment.
 //     */
-//    public static profileFavourites newInstance(String param1, String param2) {
-//        profileFavourites fragment = new profileFavourites();
+//    // TODO: Rename and change types and number of parameters
+//    public static ProfileFavouritesFragment newInstance(String param1, String param2) {
+//        ProfileFavouritesFragment fragment = new ProfileFavouritesFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -58,35 +61,41 @@ public class ProfileFavouritesFragment extends Fragment {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 //    }
-        RecyclerView profileVerticalRec;
-        List<ProfileFavModel> profileVerNodeList;
-        ProfileFavAdapter profileFavAdapter;
+
+    RecyclerView recyclerView;
+    List<ProfileFavModel> profileCardList;
+    ProfileFavAdapter profileFavAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_profile_favourites, container, false);
 
-        profileVerticalRec = root.findViewById(R.id.profile_fav_rec);
-        profileVerNodeList = new ArrayList<>();
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 1"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 2"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 3"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 4"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
-        profileVerNodeList.add(new ProfileFavModel(R.drawable.fries, "END"));
+        recyclerView = root.findViewById(R.id.profile_fav_rec);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        profileFavAdapter = new ProfileFavAdapter(getActivity(), profileVerNodeList);
-        profileVerticalRec.setAdapter(profileFavAdapter);
-        profileVerticalRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-        profileVerticalRec.setHasFixedSize(true);
-        profileVerticalRec.setNestedScrollingEnabled(false);
+        profileCardList = new ArrayList<>();
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 1"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 2"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 3"));
+        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 4"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
+        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
+        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "END"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
+        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
+
+        profileFavAdapter = new ProfileFavAdapter(getActivity(), profileCardList);
+        recyclerView.setAdapter(profileFavAdapter);
         // Inflate the layout for this fragment
         return root;
     }

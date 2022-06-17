@@ -6,10 +6,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.kitchenpal.ProfileFavouritesFragment;
-import com.example.kitchenpal.ProfileMyRecipesFragment;
+import java.util.ArrayList;
 
 public class VPA extends FragmentStateAdapter {
+
+    private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+    private final ArrayList<String> fragmentTitle = new ArrayList<>();
 
     public VPA(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
@@ -18,17 +20,20 @@ public class VPA extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position) {
-            case 1:
-                return new ProfileMyRecipesFragment();
-            case 0:
-            default:
-                return new ProfileFavouritesFragment();
-        }
+        return fragmentArrayList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return fragmentTitle.size();
+    }
+
+    public String getTitles(int pos) {
+        return fragmentTitle.get(pos);
+    }
+
+    public void addFragments(Fragment fragment, String title) {
+        fragmentArrayList.add(fragment);
+        fragmentTitle.add(title);
     }
 }
