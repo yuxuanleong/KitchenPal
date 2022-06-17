@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
 
         VPA vpa = new VPA(getChildFragmentManager(),getLifecycle());
         vpa.addFragments(new ProfileFavouritesFragment(), " Favourites");
-        vpa.addFragments(new ProfileMyRecipesFragment(),"My Recipes");
+        vpa.addFragments(new profileMyRecipes(),"My Recipes");
         viewpager.setAdapter(vpa);
         new TabLayoutMediator(tabLayout, viewpager, (tab, pos) -> tab.setText(vpa.getTitles(pos))).attach();
     }

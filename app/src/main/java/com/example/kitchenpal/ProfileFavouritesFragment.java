@@ -88,6 +88,11 @@ public class ProfileFavouritesFragment extends Fragment {
         profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
         profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
         profileCardList.add(new ProfileFavModel(R.drawable.fries, "END"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
+        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
+        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
+        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
 
         profileFavAdapter = new ProfileFavAdapter(getActivity(), profileCardList);
         recyclerView.setAdapter(profileFavAdapter);

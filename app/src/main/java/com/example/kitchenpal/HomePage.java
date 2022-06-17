@@ -22,15 +22,14 @@ public class HomePage extends AppCompatActivity {
                 case R.id.profile_nav:
                     replaceFragment(new ProfileFragment());
                     break;
-                case R.id.upload_nav:
-                    replaceFragment(new UploadFragment());
+                default:
+                    replaceFragment(new RecipesFragment());
+                    break;
+                case R.id.recipes_nav:
+                    replaceFragment(new RecipesFragment());
                     break;
                 case R.id.pantry_nav:
                     replaceFragment(new PantryFragment());
-                    break;
-                case R.id.recipes_nav:
-                default:
-                    replaceFragment(new RecipesFragment());
                     break;
             }
             return true;
