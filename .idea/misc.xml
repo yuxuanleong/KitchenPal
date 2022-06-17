@@ -14,9 +14,19 @@
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/layout/fragment_profile_my_recipes.xml" value="0.1" />
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/layout/profile_favourites_items.xml" value="0.25" />
         <entry key="..\:/Users/cally/KitchenPal/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3515625" />
+        <entry key="app/src/main/res/drawable/add_icon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/round_grey.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.3233695652173913" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/dialog_add_ingre.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.15729483282674772" />
         <entry key="app/src/main/res/layout/fragment_profile_favourites.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile_my_recipes.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.14814814814814814" />
+        <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/profile_favourites_items.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/row_add_ingre.xml" value="0.20294117647058824" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3234375" />
       </map>
     </option>
   </component>
