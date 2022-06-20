@@ -2,19 +2,19 @@ package com.example.kitchenpal.models;
 
 public class ProfileFavModel {
 
-    int image;
-    String name;
+    private Integer image;
+    private String name;
 
-    public ProfileFavModel(int image, String name) {
+    public ProfileFavModel(Integer image, String name) {
         this.image = image;
         this.name = name;
     }
 
-    public int getImage() {
+    public Integer getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Integer image) {
         this.image = image;
     }
 
