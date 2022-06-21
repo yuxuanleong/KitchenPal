@@ -22,7 +22,6 @@ import java.util.ArrayList;
 // * Use the {@link UploadFragment#newInstance} factory method to
 // * create an instance of this fragment.
 // */
-/*
 public class UploadFragment extends Fragment implements View.OnClickListener {
 
 //
@@ -45,7 +44,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
 //     * @return A new instance of fragment UploadFragment.
-//
+//     */
 //
 //    public static UploadFragment newInstance(String param1, String param2) {
 //        UploadFragment fragment = new UploadFragment();
@@ -148,4 +147,4 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         layout.removeView(view);
     }
 
-}*/
+}
