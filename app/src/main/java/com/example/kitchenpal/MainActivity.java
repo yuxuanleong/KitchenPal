@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
 
-//        //MAIN
+//        MAIN
 //        tvUsername = findViewById(R.id.showUsername);
 //
 //        FirebaseAuth mAuth = FirebaseAuth.getInstance();

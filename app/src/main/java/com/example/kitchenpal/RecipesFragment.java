@@ -6,6 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.kitchenpal.adapters.RecipesViewerAdapter;
+import com.example.kitchenpal.models.RecipesViewerModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -13,6 +21,10 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class RecipesFragment extends Fragment {
+
+    RecyclerView recipesViewer;
+    List<RecipesViewerModel> recipesViewerModelList;
+    RecipesViewerAdapter recipesViewerAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +37,35 @@ public class RecipesFragment extends Fragment {
 
     public RecipesFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_recipes, container, false);
+
+        recipesViewer = root.findViewById(R.id.recipeView);
+
+        ////vertical recyclerView
+
+        recipesViewerModelList = new ArrayList<>();
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, "Burger", "baker101"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.fries, "French fries", "cook101"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, "Pizza", "PizzaMan"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, "Cheeseburger", "hehexd"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.fries, "Shoestring fries", "Mcdonalds"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, "Margherita pizza", "LINO's"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
+
+        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+        recipesViewer.setAdapter(recipesViewerAdapter);
+        recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,false));
+        recipesViewer.setHasFixedSize(true);
+
+        return root;
     }
 
     /**
@@ -52,12 +93,5 @@ public class RecipesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipes, container, false);
     }
 }
