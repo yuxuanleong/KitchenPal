@@ -1,57 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".UploadFragment">
+    tools:context=".uploadFragment.UploadFragment">
 
-    <TextView
-        android:id="@+id/tIngredientList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_gravity="center_horizontal"
-        android:text="Ingredient list" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please add the ingredients to your recipe"
-        android:layout_gravity="center_horizontal"/>
-
-    <RelativeLayout
+    <EditText
+        android:id="@+id/etRecipeName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/round_grey"
+        android:gravity="center_horizontal"
+        android:hint="Recipe name"
+        android:textSize="25sp" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp">
+    <FrameLayout
+        android:id="@+id/frameLayoutUpload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_below="@+id/etRecipeName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-            <LinearLayout
-                android:id="@+id/layout_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Submit"
+        android:layout_alignParentBottom="true"/>
 
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:layout_toLeftOf="@id/buttonSubmitIngre"
-            android:layout_alignParentBottom="true"/>
-        <Button
-            android:id="@+id/buttonSubmitIngre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:drawableEnd="@drawable/icon_right_arrow"/>
 
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

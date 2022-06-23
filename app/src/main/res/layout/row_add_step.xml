@@ -6,7 +6,7 @@
     android:paddingVertical="5dp">
 
     <EditText
-        android:id="@+id/etIngredient"
+        android:id="@+id/etStep"
         android:layout_weight="1"
         android:background="@drawable/round_grey"
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_height="40dp"/>
 
     <ImageView
-        android:id="@+id/imageRemoveIngre"
+        android:id="@+id/imageRemoveStep"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_gravity="center"

@@ -1,10 +1,12 @@
-package com.example.kitchenpal;
+package com.example.kitchenpal.uploadFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,40 +16,42 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.kitchenpal.R;
+import com.example.kitchenpal.objects.Recipe;
 
+import java.util.ArrayList;
 
 ///**
 // * A simple {@link Fragment} subclass.
-// * Use the {@link UploadFragment#newInstance} factory method to
+// * Use the {@link AddIngredientFragment#newInstance} factory method to
 // * create an instance of this fragment.
 // */
-public class UploadFragment extends Fragment implements View.OnClickListener {
-
+public class AddIngredientFragment extends Fragment implements View.OnClickListener {
 //
+//    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
 //
-//
+//    // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
-
-    public UploadFragment() {
-        // Required empty public constructor
-    }
-
+//
+//    public AddIngredientFragment() {
+//        // Required empty public constructor
+//    }
+//
 //    /**
 //     * Use this factory method to create a new instance of
 //     * this fragment using the provided parameters.
 //     *
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
-//     * @return A new instance of fragment UploadFragment.
+//     * @return A new instance of fragment AddIngredientFragment.
 //     */
-//
-//    public static UploadFragment newInstance(String param1, String param2) {
-//        UploadFragment fragment = new UploadFragment();
+//    // TODO: Rename and change types and number of parameters
+//    public static AddIngredientFragment newInstance(String param1, String param2) {
+//        AddIngredientFragment fragment = new AddIngredientFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -64,36 +68,42 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 //        }
 //    }
 
-    LinearLayout layout;
-    Button buttonAdd;
-    Button buttonSubmit;
+    LinearLayout layoutIngre;
+    Button buttonAddIngre, buttonNext;
+    UploadFragment parentFrag;
 
-    ArrayList<Ingredient> ingreList = new ArrayList<>();
+    ArrayList<String> ingreList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_upload, container, false);
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_add_ingredient, container, false);
 
-        layout = root.findViewById(R.id.layout_list);
-        buttonAdd = root.findViewById(R.id.buttonAdd);
-        buttonSubmit = root.findViewById(R.id.buttonSubmitIngre);
+        layoutIngre = root.findViewById(R.id.linearLayout_list_ingredients);
+        buttonAddIngre = root.findViewById(R.id.buttonAddIngre);
+        buttonNext = root.findViewById(R.id.btnGoToAddStep);
+        parentFrag = (UploadFragment) getParentFragment();
 
-        buttonAdd.setOnClickListener(this);
-        buttonSubmit.setOnClickListener(this);
+        buttonAddIngre.setOnClickListener(this);
+        buttonNext.setOnClickListener(this);
 
         return root;
+    }
+
+    protected ArrayList<String> getIngreList() {
+        return ingreList;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.buttonAdd:
-                addView();
+            case R.id.buttonAddIngre:
+                addIngreView();
                 break;
-            case R.id.buttonSubmitIngre:
+            case R.id.btnGoToAddStep:
                 if (checkIfValidAndRead()) {
-                    // TODO: send data to database
+                    parentFrag.replaceFragment(parentFrag.getStepFrag());
                 }
                 break;
         }
@@ -103,48 +113,54 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         ingreList.clear();
         boolean result = true;
 
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            View v = layout.getChildAt(i);
+        for (int i = 0; i < layoutIngre.getChildCount(); i++) {
+            View v = layoutIngre.getChildAt(i);
             EditText etIngre = v.findViewById(R.id.etIngredient);
             String ingreName = etIngre.getText().toString();
 
-            Ingredient ingre = new Ingredient();
-
             if (!ingreName.equals("")) {
-                ingre.setIngredientName(ingreName);
+                ingreList.add(ingreName);
             } else {
                 result = false;
                 break;
             }
-
-            ingreList.add(ingre);
         }
 
         if (ingreList.size() == 0) {
             result = false;
             Toast.makeText(getActivity(), "Add ingredient(s) first!", Toast.LENGTH_SHORT).show();
         }
+
+
         return result;
     }
 
 
 
-    private void addView() {
+    private void addIngreView() {
         View v = getLayoutInflater().inflate(R.layout.row_add_ingre,null, false);
         EditText etIngre = v.findViewById(R.id.etIngredient);
-        ImageView imgRemove = v.findViewById(R.id.imageRemove);
+        ImageView imgRemoveIngre = v.findViewById(R.id.imageRemoveIngre);
 
-        imgRemove.setOnClickListener(new View.OnClickListener() {
+        imgRemoveIngre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeView(v);
+                removeIngreView(v);
             }
         });
-        layout.addView(v);
+        layoutIngre.addView(v);
     }
 
-    private void removeView(View view) {
-        layout.removeView(view);
+
+
+    private void removeIngreView(View view) {
+        layoutIngre.removeView(view);
     }
 
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.ingreFrameLayout, fragment);
+        ft.commit();
+    }
 }
