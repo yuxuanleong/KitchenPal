@@ -9,7 +9,7 @@
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/constraintLayout"
         android:layout_marginEnd="4dp"
@@ -19,13 +19,13 @@
         <ImageView
             android:id="@+id/recipeImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:scaleType="center"
-            android:src="@drawable/macaroni"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/pizza"
+            app:layout_constraintBottom_toTopOf="@+id/createdBy"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
             app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="27dp" />
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
             android:id="@+id/recipeName"

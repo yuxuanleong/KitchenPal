@@ -1,9 +1,11 @@
 package com.example.kitchenpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,18 +49,27 @@ public class RecipesFragment extends Fragment {
 
         recipesViewer = root.findViewById(R.id.recipeView);
 
+        Button btnOpen = (Button) root.findViewById(R.id.OpenHands);
+        btnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getActivity(), HandsFreeSteps.class);
+                startActivity(in);
+            }
+        });
+
         ////vertical recyclerView
 
         recipesViewerModelList = new ArrayList<>();
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, "Burger", "baker101"));
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.fries, "French fries", "cook101"));
-        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, "Mac N Cheese", "cook123"));
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, "Pizza", "PizzaMan"));
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, "Cheeseburger", "hehexd"));
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.fries, "Shoestring fries", "Mcdonalds"));
         recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, "Margherita pizza", "LINO's"));
-        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
-        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.macaroni, "Mac N Cheese", "cook123"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, "Mac N Cheese", "cook123"));
+        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.fries, "Mac N Cheese", "cook123"));
 
         recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
         recipesViewer.setAdapter(recipesViewerAdapter);
