@@ -64,6 +64,6 @@
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintStart_toEndOf="@+id/recipeName" />
+            app:layout_constraintStart_toEndOf="@+id/recipeName"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
