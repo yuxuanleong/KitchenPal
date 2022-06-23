@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.KitchenPal.Fullscreen" parent="Theme.KitchenPal">
+        <item name="android:actionBarStyle">@style/Widget.Theme.KitchenPal.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.KitchenPal.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/grey</item>
+        <item name="fullscreenTextColor">@color/black</item>
+    </style>
 </resources>

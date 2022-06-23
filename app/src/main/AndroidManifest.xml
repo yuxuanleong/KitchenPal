@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.kitchenpal">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +16,12 @@
         android:theme="@style/Theme.KitchenPal"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".HandsFreeSteps"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_hands_free_steps"
+            android:theme="@style/Theme.KitchenPal.Fullscreen" />
         <activity
             android:name=".HomePage"
             android:exported="false" />
