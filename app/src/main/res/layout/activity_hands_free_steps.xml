@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/fullscreenBackgroundColor"
     android:theme="@style/ThemeOverlay.KitchenPal.FullscreenContainer"
+    android:keepScreenOn="true"
     tools:context=".HandsFreeSteps">
 
     <!-- This FrameLayout insets its children based on system windows using

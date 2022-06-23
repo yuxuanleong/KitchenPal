@@ -55,4 +55,9 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
             createdBy = itemView.findViewById(R.id.createdBy);
         }
     }
+
+    public void setFilteredList(List<RecipesViewerModel> filteredList) {
+        this.listModels= filteredList;
+        notifyDataSetChanged();
+    }
 }

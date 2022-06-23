@@ -26,6 +26,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,6 +85,7 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hands_free_steps);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Initialise UI
         Button nextButton = (Button) findViewById(R.id.nextButton);

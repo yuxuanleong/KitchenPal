@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,7 @@ import com.example.kitchenpal.models.RecipesViewerModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,9 +27,10 @@ import java.util.List;
  */
 public class RecipesFragment extends Fragment {
 
-    RecyclerView recipesViewer;
-    List<RecipesViewerModel> recipesViewerModelList;
-    RecipesViewerAdapter recipesViewerAdapter;
+    private RecyclerView recipesViewer;
+    private List<RecipesViewerModel> recipesViewerModelList;
+    private SearchView searchView;
+    private RecipesViewerAdapter recipesViewerAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,19 +48,41 @@ public class RecipesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_recipes, container, false);
 
-        recipesViewer = root.findViewById(R.id.recipeView);
-
-        Button btnOpen = (Button) root.findViewById(R.id.OpenHands);
-        btnOpen.setOnClickListener(new View.OnClickListener() {
+        searchView = root.findViewById(R.id.search_bar);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                Intent in = new Intent(getActivity(), HandsFreeSteps.class);
-                startActivity(in);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+
+            private void filterList(String newText) {
+                List<RecipesViewerModel> filteredList = new ArrayList<RecipesViewerModel>();
+                for (RecipesViewerModel recipe :  recipesViewerModelList) {
+                    if (recipe.getRecipeName().toLowerCase().contains(newText.toLowerCase())) {
+                        filteredList.add(recipe);
+                    }
+                }
+
+                if (filteredList.isEmpty()) {
+                    Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    recipesViewerAdapter.setFilteredList(filteredList);
+                }
             }
         });
+
+        recipesViewer = root.findViewById(R.id.recipeView);
 
         ////vertical recyclerView
 
