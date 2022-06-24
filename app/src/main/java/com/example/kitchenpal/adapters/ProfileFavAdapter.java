@@ -30,7 +30,7 @@ public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_favourites_items, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recipes_recipeview, parent, false));
     }
 
     @Override
@@ -55,12 +55,14 @@ public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.Vi
 
         ImageView imageView;
         TextView name;
+        TextView publisher;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.ver_img);
-            name = itemView.findViewById(R.id.ver_text);
+            imageView = itemView.findViewById(R.id.recipeImage);
+            name = itemView.findViewById(R.id.recipeName);
+            publisher = itemView.findViewById(R.id.createdBy);
         }
     }
 }

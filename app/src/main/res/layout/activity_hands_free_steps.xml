@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="?attr/fullscreenBackgroundColor"
     android:theme="@style/ThemeOverlay.KitchenPal.FullscreenContainer"
-    android:keepScreenOn="true"
     tools:context=".HandsFreeSteps">
 
     <!-- This FrameLayout insets its children based on system windows using
@@ -49,6 +48,18 @@
             android:text="NEXT"
             app:layout_constraintBottom_toBottomOf="@id/RecipeStep"
             app:layout_constraintEnd_toEndOf="@id/RecipeStep" />
+
+        <Button
+            android:id="@+id/handsFreeBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BACK"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintStart_toStartOf="@id/frameLayout2"
+            app:layout_constraintBottom_toBottomOf="@id/frameLayout2"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
