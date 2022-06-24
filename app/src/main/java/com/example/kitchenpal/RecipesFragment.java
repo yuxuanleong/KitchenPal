@@ -52,6 +52,15 @@ public class RecipesFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_recipes, container, false);
 
+        Button text = (Button) root.findViewById(R.id.textMode);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), RecipeText.class);
+                startActivity(intent);
+            }
+        });
+
         searchView = root.findViewById(R.id.search_bar);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

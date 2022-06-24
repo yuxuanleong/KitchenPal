@@ -28,6 +28,7 @@ import android.speech.SpeechRecognizer;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
 
 import com.example.kitchenpal.databinding.ActivityHandsFreeStepsBinding;
 
@@ -88,11 +90,24 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Initialise UI
+        ImageButton exitButton = (ImageButton) findViewById(R.id.exit_button);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { finish(); }
+        });
         Button nextButton = (Button) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleNext(v);
+            }
+        });
+
+        Button backButton = (Button) findViewById(R.id.handsFreeBackButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleBack(v);
             }
         });
 
@@ -223,15 +238,16 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     //switch to next step
     public void toggleNext(View view) {
         this.currStep++;
-        if (currStep > steps.size() - 1) {
-
+        if (!(currStep > steps.size() - 1)) {
+            textView.setText(steps.get(currStep));
         }
-        textView.setText(steps.get(currStep));
     }
 
     //switch to prev step
     public void toggleBack(View view) {
         this.currStep--;
-        textView.setText(steps.get(currStep));
+        if(!(currStep < 0)) {
+            textView.setText(steps.get(currStep));
+        }
     }
 }
