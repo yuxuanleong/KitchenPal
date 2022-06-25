@@ -1,4 +1,4 @@
-package com.example.kitchenpal;
+package com.example.kitchenpal.profileFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.ProfileFavAdapter;
 import com.example.kitchenpal.models.ProfileFavModel;
 
@@ -88,11 +89,6 @@ public class ProfileFavouritesFragment extends Fragment {
         profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
         profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
         profileCardList.add(new ProfileFavModel(R.drawable.fries, "END"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
 
         profileFavAdapter = new ProfileFavAdapter(getActivity(), profileCardList);
         recyclerView.setAdapter(profileFavAdapter);

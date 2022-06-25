@@ -1,4 +1,4 @@
-package com.example.kitchenpal;
+package com.example.kitchenpal.recipesFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,8 @@ import com.example.kitchenpal.models.RecipesViewerModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import com.example.kitchenpal.R;
 
 /**
  * A simple {@link Fragment} subclass.

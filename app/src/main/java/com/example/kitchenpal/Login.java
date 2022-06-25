@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            switchToMain();
+                            switchToHome();
                         } else {
                             Toast.makeText(Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }
@@ -97,8 +97,8 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    private void switchToMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void switchToHome() {
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
         finish();
     }
