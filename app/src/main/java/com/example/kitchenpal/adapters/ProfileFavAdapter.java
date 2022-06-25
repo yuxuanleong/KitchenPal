@@ -13,16 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.models.ProfileFavModel;
+import com.example.kitchenpal.models.RecipesViewerModel;
 
 import java.util.List;
 
 public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.ViewHolder> {
 
     Context context;
-    List<ProfileFavModel> list;
+    List<RecipesViewerModel> list;
 
-    public ProfileFavAdapter(Context context, List<ProfileFavModel> list) {
+    public ProfileFavAdapter(Context context, List<RecipesViewerModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,12 +36,13 @@ public class ProfileFavAdapter extends RecyclerView.Adapter<ProfileFavAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.imageView.setImageResource(list.get(position).getImage());
-        holder.name.setText(list.get(position).getName());
+        holder.name.setText(list.get(position).getRecipeName());
+        holder.publisher.setText(list.get(position).getPublisher());
         
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, list.get(position).getRecipeName(), Toast.LENGTH_SHORT).show();
             }
         });
     }

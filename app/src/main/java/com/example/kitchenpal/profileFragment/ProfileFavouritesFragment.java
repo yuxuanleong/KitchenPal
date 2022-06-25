@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.ProfileFavAdapter;
-import com.example.kitchenpal.models.ProfileFavModel;
+import com.example.kitchenpal.models.RecipesViewerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class ProfileFavouritesFragment extends Fragment {
 //    }
 
     RecyclerView recyclerView;
-    List<ProfileFavModel> profileCardList;
+    List<RecipesViewerModel> profileCardList;
     ProfileFavAdapter profileFavAdapter;
 
     @Override
@@ -78,17 +78,17 @@ public class ProfileFavouritesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         profileCardList = new ArrayList<>();
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 1"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 2"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 3"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 4"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 5"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 6"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "liked 7"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 8"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "liked 9"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "liked 10"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "END"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 1", "user"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 2", "user"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 3", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 4", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "liked 5", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 6", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "liked 7", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 8", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 9", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 10", "name"));
+        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "END", "name"));
 
         profileFavAdapter = new ProfileFavAdapter(getActivity(), profileCardList);
         recyclerView.setAdapter(profileFavAdapter);

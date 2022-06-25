@@ -1,4 +1,4 @@
-package com.example.kitchenpal;
+//package com.example.kitchenpal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 // * Use the {@link UploadFragment#newInstance} factory method to
 // * create an instance of this fragment.
 // */
+
+/*
 public class UploadFragment extends Fragment implements View.OnClickListener {
 
 //
@@ -63,7 +65,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 //    }
-
+/*
     LinearLayout layout;
     Button buttonAdd;
     Button buttonSubmit;
@@ -146,5 +148,5 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private void removeView(View view) {
         layout.removeView(view);
     }
-
 }
+*/

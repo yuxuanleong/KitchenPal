@@ -24,7 +24,7 @@
             android:label="@string/title_activity_hands_free_steps"
             android:theme="@style/Theme.KitchenPal.Fullscreen" />
         <activity
-            android:name=".RecipeText"
+            android:name=".recipesFragment.RecipeText"
             android:exported="false"/>
         <activity
             android:name=".HomePage"
