@@ -8,26 +8,22 @@ import android.widget.TextView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.models.ProfileFavModel;
+import com.example.kitchenpal.models.ProfileMyRecipeModel;
 
 import java.util.List;
 
 public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecipesAdapter.ViewHolder> {
 
     Context context;
-    List<ProfileFavModel> list;
+    List<ProfileMyRecipeModel> list;
 
-    public ProfileMyRecipesAdapter(Context context, List<ProfileFavModel> list) {
+    public ProfileMyRecipesAdapter(Context context, List<ProfileMyRecipeModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -35,7 +31,7 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
     @NonNull
     @Override
     public ProfileMyRecipesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ProfileMyRecipesAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_favourites_items, parent, false));
+        return new ProfileMyRecipesAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recipes_recipeview, parent, false));
     }
 
     @Override
@@ -60,12 +56,14 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
 
         ImageView imageView;
         TextView name;
+        TextView publisher;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.ver_img);
-            name = itemView.findViewById(R.id.ver_text);
+            imageView = itemView.findViewById(R.id.recipeImage);
+            name = itemView.findViewById(R.id.recipeName);
+            publisher = itemView.findViewById(R.id.createdBy);
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.example.kitchenpal.models;
 
-public class ProfileFavModel {
+public class ProfileMyRecipeModel {
 
     private Integer image;
     private String name;
 
-    public ProfileFavModel(Integer image, String name) {
+    public ProfileMyRecipeModel(Integer image, String name) {
         this.image = image;
         this.name = name;
     }

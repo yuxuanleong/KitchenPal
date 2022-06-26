@@ -19,6 +19,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        replaceFragment(new RecipesFragment());
 
         BottomNavigationView navigationBar = findViewById(R.id.navigationBar);
         navigationBar.setOnItemSelectedListener(item -> {

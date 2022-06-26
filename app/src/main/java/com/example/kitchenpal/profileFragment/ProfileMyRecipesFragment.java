@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.ProfileMyRecipesAdapter;
-import com.example.kitchenpal.models.ProfileFavModel;
+import com.example.kitchenpal.models.ProfileMyRecipeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class ProfileMyRecipesFragment extends Fragment {
 //    }
 
     RecyclerView recyclerView;
-    List<ProfileFavModel> profileCardList;
+    List<ProfileMyRecipeModel> profileCardList;
     ProfileMyRecipesAdapter profileMyRecipesAdapter;
 
     @Override
@@ -79,18 +79,18 @@ public class ProfileMyRecipesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         profileCardList = new ArrayList<>();
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "mine 1"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "mine 2"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "mine 3"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "mine 4"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "mine 5"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "mine 6"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "mine 7"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "mine 8"));
-        profileCardList.add(new ProfileFavModel(R.drawable.pizza, "mine 9"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "mine 10"));
-        profileCardList.add(new ProfileFavModel(R.drawable.burger, "mine 11"));
-        profileCardList.add(new ProfileFavModel(R.drawable.fries, "END"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 1"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 2"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 3"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 4"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 5"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 6"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 7"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 8"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 9"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 10"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 11"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "END"));
 
         profileMyRecipesAdapter = new ProfileMyRecipesAdapter(getActivity(), profileCardList);
         recyclerView.setAdapter(profileMyRecipesAdapter);

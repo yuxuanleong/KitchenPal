@@ -8,12 +8,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
 
-public class VPA extends FragmentStateAdapter {
+public class ViewpagerAdapter extends FragmentStateAdapter {
 
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private final ArrayList<String> fragmentTitle = new ArrayList<>();
 
-    public VPA(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public ViewpagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 

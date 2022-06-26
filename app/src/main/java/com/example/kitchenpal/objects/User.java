@@ -4,12 +4,33 @@ import java.util.ArrayList;
 
 public class User {
     private String username, email;
-    private ArrayList<Recipe> recipes;
+    private ArrayList<Recipe> myRecipes, favourites;
 
-    public User(String username, String email, ArrayList<Recipe> recipes) {
+    private enum proficiency {
+        BEGINNER("Beginner"),
+        INTERMEDIATE("Intermediate"),
+        SEASONED("Seasoned"),
+        EXPERIENCED("Experienced");
+
+        private String proficiency;
+
+        proficiency(String proficiency) {
+            this.proficiency = proficiency;
+        }
+
+        public String getProficiency() {
+            return this.proficiency;
+        }
+    }
+
+    public User() {
+
+    }
+    public User(String username, String email, ArrayList<Recipe> myRecipes, ArrayList<Recipe> favourites) {
         this.username = username;
         this.email = email;
-        this.recipes = recipes;
+        this.myRecipes = myRecipes;
+        this.favourites = favourites;
     }
 
     public String getUsername() {
@@ -26,6 +47,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<Recipe> getMyRecipes() {
+        return myRecipes;
+    }
+
+    public void setMyRecipes(ArrayList<Recipe> myRecipes) {
+        this.myRecipes = myRecipes;
+    }
+
+    public ArrayList<Recipe> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(ArrayList<Recipe> favourites) {
+        this.favourites = favourites;
     }
 }
 
