@@ -25,4 +25,5 @@ public class RecipesViewerModel {
     public String getPublisher() {
         return publisher;
     }
+
 }

@@ -82,8 +82,8 @@ public class UploadFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseDatabase myDatabase;
     DatabaseReference users_user_ref, recipes_sort_by_username_ref, recipes_sort_by_name_ref;
-    AddStepFragment stepFrag = null;
-    AddIngredientFragment ingreFrag = null;
+    AddStepFragment stepFrag = new AddStepFragment();
+    AddIngredientFragment ingreFrag = new AddIngredientFragment();
     ProfileMyRecipesFragment myRecipesFragment = new ProfileMyRecipesFragment();
     ArrayList<String> ingreList, stepList;
 
@@ -107,10 +107,8 @@ public class UploadFragment extends Fragment {
         users_user_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if (user != null) {
-                    publisher = user.getUsername();
-                }
+                publisher = snapshot.child("username").getValue(String.class);
+
             }
 
             @Override
