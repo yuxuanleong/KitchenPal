@@ -1,5 +1,7 @@
 package com.example.kitchenpal.models;
 
+import android.widget.ToggleButton;
+
 public class RecipesViewerModel {
     int image;
     String recipeName;

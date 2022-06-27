@@ -85,11 +85,12 @@ public class AddStepFragment extends Fragment implements View.OnClickListener {
 
         buttonBack = root.findViewById(R.id.btnBackToIngre);
         buttonAdd = root.findViewById(R.id.buttonAddStep);
-        layoutStep = root.findViewById(R.id.linearLayout_list_steps);
+        layoutStep = (LinearLayout) root.findViewById(R.id.linearLayout_list_steps);
         parentFrag = (UploadFragment) getParentFragment();
 
         buttonBack.setOnClickListener(this);
         buttonAdd.setOnClickListener(this);
+        addStepView();
 
         return root;
     }
@@ -105,6 +106,7 @@ public class AddStepFragment extends Fragment implements View.OnClickListener {
                 addStepView();
                 break;
             case R.id.btnBackToIngre:
+                parentFrag.setStepFrag(this);
                 parentFrag.replaceFragment(parentFrag.getIngreFrag());
                 break;
         }

@@ -87,7 +87,7 @@ public class AddIngredientFragment extends Fragment implements View.OnClickListe
 
         buttonAddIngre.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
-
+        addIngreView();
         return root;
     }
 
@@ -103,13 +103,19 @@ public class AddIngredientFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btnGoToAddStep:
                 if (checkIfValidAndRead()) {
-                    parentFrag.replaceFragment(parentFrag.getStepFrag());
+                    parentFrag.setIngreFrag(this);
+                    if (parentFrag.getStepFrag() == null) {
+                        parentFrag.replaceFragment(new AddStepFragment());
+                    } else {
+                        parentFrag.replaceFragment(parentFrag.getStepFrag());
+                    }
+
                 }
                 break;
         }
     }
 
-    private boolean checkIfValidAndRead() {
+    protected boolean checkIfValidAndRead() {
         ingreList.clear();
         boolean result = true;
 

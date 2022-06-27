@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.RecipesViewerModel;
@@ -81,8 +82,8 @@ public class UploadFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseDatabase myDatabase;
     DatabaseReference users_user_ref, recipes_sort_by_username_ref, recipes_sort_by_name_ref;
-    AddStepFragment stepFrag = new AddStepFragment();;
-    AddIngredientFragment ingreFrag = new AddIngredientFragment();;
+    AddStepFragment stepFrag = null;
+    AddIngredientFragment ingreFrag = null;
     ProfileMyRecipesFragment myRecipesFragment = new ProfileMyRecipesFragment();
     ArrayList<String> ingreList, stepList;
 
@@ -93,6 +94,8 @@ public class UploadFragment extends Fragment {
 
         etRecipeName = root.findViewById(R.id.etRecipeName);
         buttonSubmit = root.findViewById(R.id.btnSubmit);
+//        ingreFrag = new AddIngredientFragment();
+//        stepFrag = new AddStepFragment();
         myDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         users_user_ref = myDatabase.getReference("users").child(mAuth.getCurrentUser()
@@ -116,7 +119,8 @@ public class UploadFragment extends Fragment {
             }
         });
 
-        replaceFragment(ingreFrag);
+//        replaceFragment(ingreFrag);
+        replaceFragment(new AddIngredientFragment());
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,9 +128,20 @@ public class UploadFragment extends Fragment {
                 stepFrag.checkIfValidAndRead();
                 stepList = stepFrag.getStepList();
                 ingreList = ingreFrag.getIngreList();
-                recipeName = etRecipeName.getText().toString();
-                Recipe recipe = new Recipe(recipeName, publisher, ingreList, stepList);
-                addRecipeToDatabase(recipe);
+
+                if (stepList.size() > 0 && ingreList.size() > 0) {
+                    recipeName = etRecipeName.getText().toString();
+                    if (!recipeName.equals("")) {
+                        Recipe recipe = new Recipe(recipeName, publisher, ingreList, stepList);
+                        addRecipeToDatabase(recipe);
+                        Toast.makeText(getActivity(), "Recipe uploaded", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Please enter recipe name!", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(getActivity(), "Add ingredients/steps first!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -141,12 +156,20 @@ public class UploadFragment extends Fragment {
         return ingreFrag;
     }
 
+    protected void setIngreFrag(AddIngredientFragment frag) {
+        this.ingreFrag = frag;
+    }
+
+    protected void setStepFrag(AddStepFragment frag) {
+        this.stepFrag = frag;
+    }
+
 
     private void addRecipeToDatabase (Recipe recipe) {
         users_user_ref.child("my_recipes").child(recipe.getName()).setValue(recipe);
         recipes_sort_by_username_ref.child(publisher).child(recipe.getName()).setValue(recipe);
         recipes_sort_by_name_ref.child(recipe.getName()).setValue(recipe);
-        myRecipesFragment.addRecipeToMyRecipe(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
+//        myRecipesFragment.addRecipeToMyRecipe(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
     }
 
     protected void replaceFragment(Fragment fragment) {

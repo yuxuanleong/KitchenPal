@@ -7,12 +7,17 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".profileFragment.ProfileFragment">
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:layout_gravity="end"/>
 
     <ImageView
         android:id="@+id/profilePic"
         android:layout_width="112dp"
         android:layout_height="130dp"
-        android:layout_marginTop="40dp"
         android:src="@drawable/pizza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -36,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:text="TextView"
+        android:text="Beginner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

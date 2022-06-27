@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -86,58 +87,41 @@ public class ProfileMyRecipesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile_my_recipes, container, false);
+
         getRecipesFromDatabase();
         recyclerView = root.findViewById(R.id.profile_my_recipe_rec);
 
-//        //get username
-//        FirebaseDatabase.getInstance().getReference("users")
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                .addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                User user = snapshot.getValue(User.class);
-//                if (user != null) {
-//                    username = user.getUsername();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-//        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "lagsana", "elyse"));
-        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), profileCardList);
-        recyclerView.setAdapter(recipesViewerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
 
         // Inflate the layout for this fragment
         return root;
     }
 
-    public void addRecipeToMyRecipe(RecipesViewerModel recipesViewerModel) {
-        profileCardList.add(recipesViewerModel);
-    }
+//    public void addRecipeToMyRecipe(RecipesViewerModel recipesViewerModel) {
+//        profileCardList.add(recipesViewerModel);
+//    }
     private void getRecipesFromDatabase() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .child("my_recipes");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query = ref.child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("my_recipes");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     profileCardList.clear();
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
-                        Toast.makeText(getActivity(), recipe.getName(), Toast.LENGTH_SHORT).show();
-                        profileCardList.add(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
+                        assert recipe != null;
+                        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
                     }
                 }
+                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), profileCardList);
+                recyclerView.setAdapter(recipesViewerAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setNestedScrollingEnabled(false);
             }
 
             @Override
