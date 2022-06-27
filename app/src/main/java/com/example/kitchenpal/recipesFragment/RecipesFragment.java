@@ -37,10 +37,10 @@ import com.google.firebase.database.ValueEventListener;
 // * create an instance of this fragment.
 // */
 public class RecipesFragment extends Fragment {
+    private SearchView searchView;
 
     private RecyclerView recipesViewer;
     private List<RecipesViewerModel> recipesViewerModelList = new ArrayList<>();
-    private SearchView searchView;
     private RecipesViewerAdapter recipesViewerAdapter;
 
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -131,23 +131,7 @@ public class RecipesFragment extends Fragment {
 
     private void getRecipesFromDatabase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("recipes_sort_by_recipe_name");
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    recipesViewerModelList.clear();
-//                    for (DataSnapshot dss : snapshot.getChildren()) {
-//                        Recipe recipe = dss.getValue(Recipe.class);
-//                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -165,5 +149,22 @@ public class RecipesFragment extends Fragment {
 
             }
         });
+        //        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    recipesViewerModelList.clear();
+//                    for (DataSnapshot dss : snapshot.getChildren()) {
+//                        Recipe recipe = dss.getValue(Recipe.class);
+//                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 }

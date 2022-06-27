@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.kitchenpal.R;
+import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.Recipe;
 import com.example.kitchenpal.objects.User;
+import com.example.kitchenpal.profileFragment.ProfileMyRecipesFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,6 +83,7 @@ public class UploadFragment extends Fragment {
     DatabaseReference users_user_ref, recipes_sort_by_username_ref, recipes_sort_by_name_ref;
     AddStepFragment stepFrag = new AddStepFragment();;
     AddIngredientFragment ingreFrag = new AddIngredientFragment();;
+    ProfileMyRecipesFragment myRecipesFragment = new ProfileMyRecipesFragment();
     ArrayList<String> ingreList, stepList;
 
     @Override
@@ -143,6 +146,7 @@ public class UploadFragment extends Fragment {
         users_user_ref.child("my_recipes").child(recipe.getName()).setValue(recipe);
         recipes_sort_by_username_ref.child(publisher).child(recipe.getName()).setValue(recipe);
         recipes_sort_by_name_ref.child(recipe.getName()).setValue(recipe);
+        myRecipesFragment.addRecipeToMyRecipe(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
     }
 
     protected void replaceFragment(Fragment fragment) {

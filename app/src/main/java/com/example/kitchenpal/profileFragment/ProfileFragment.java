@@ -32,6 +32,7 @@ public class ProfileFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager2 viewpager;
     TextView profileUsername;
+    String username;
     FirebaseAuth mAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
@@ -56,7 +57,8 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 if (user != null) {
-                    profileUsername.setText(user.getUsername());
+                    username = user.getUsername();
+                    profileUsername.setText(username);
                 }
             }
 
@@ -67,6 +69,10 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    protected String getUsername() {
+        return this.username;
     }
 
     private void addFragment(View view) {
