@@ -25,10 +25,12 @@ import java.util.Locale;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.objects.Recipe;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 ///**
@@ -37,10 +39,10 @@ import com.google.firebase.database.ValueEventListener;
 // * create an instance of this fragment.
 // */
 public class RecipesFragment extends Fragment {
+    private SearchView searchView;
 
     private RecyclerView recipesViewer;
     private List<RecipesViewerModel> recipesViewerModelList = new ArrayList<>();
-    private SearchView searchView;
     private RecipesViewerAdapter recipesViewerAdapter;
 
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,10 +96,10 @@ public class RecipesFragment extends Fragment {
         });
 
         getRecipesFromDatabase();
-        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
-        recipesViewer.setAdapter(recipesViewerAdapter);
-        recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,false));
-        recipesViewer.setHasFixedSize(true);
+//        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+//        recipesViewer.setAdapter(recipesViewerAdapter);
+//        recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,false));
+//        recipesViewer.setHasFixedSize(true);
 
         return root;
     }
@@ -130,34 +132,27 @@ public class RecipesFragment extends Fragment {
     }
 
     private void getRecipesFromDatabase() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("recipes_sort_by_recipe_name");
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    recipesViewerModelList.clear();
-//                    for (DataSnapshot dss : snapshot.getChildren()) {
-//                        Recipe recipe = dss.getValue(Recipe.class);
-//                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-        ref.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query = ref.child("recipes_sort_by_recipe_name");
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     recipesViewerModelList.clear();
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
-                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.burger, recipe.getName(), recipe.getPublisher()));
+                        assert recipe != null;
+//                        Toast.makeText(getActivity(), recipe.getName(), Toast.LENGTH_SHORT).show();
+                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
                     }
                 }
+                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+                recipesViewer.setAdapter(recipesViewerAdapter);
+                recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                recipesViewer.setHasFixedSize(true);
+                recipesViewer.setNestedScrollingEnabled(false);
             }
 
             @Override

@@ -2,6 +2,7 @@ package com.example.kitchenpal.profileFragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,19 +10,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.ProfileMyRecipesAdapter;
+import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.ProfileMyRecipeModel;
+import com.example.kitchenpal.models.RecipesViewerModel;
+import com.example.kitchenpal.objects.Recipe;
+import com.example.kitchenpal.objects.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileMyRecipesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+///**
+// * A simple {@link Fragment} subclass.
+// * Use the {@link ProfileMyRecipesFragment#newInstance} factory method to
+// * create an instance of this fragment.
+// */
 public class ProfileMyRecipesFragment extends Fragment {
 
 //    // TODO: Rename parameter arguments, choose names that match
@@ -33,10 +46,10 @@ public class ProfileMyRecipesFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 //
-//    public ProfileMyRecipesFragment() {
-//        // Required empty public constructor
-//    }
-//
+    public ProfileMyRecipesFragment() {
+        // Required empty public constructor
+    }
+
 //    /**
 //     * Use this factory method to create a new instance of
 //     * this fragment using the provided parameters.
@@ -45,7 +58,7 @@ public class ProfileMyRecipesFragment extends Fragment {
 //     * @param param2 Parameter 2.
 //     * @return A new instance of fragment profileMyRecipes.
 //     */
-//    // TODO: Rename and change types and number of parameters
+
 //    public static ProfileMyRecipesFragment newInstance(String param1, String param2) {
 //        ProfileMyRecipesFragment fragment = new ProfileMyRecipesFragment();
 //        Bundle args = new Bundle();
@@ -54,47 +67,67 @@ public class ProfileMyRecipesFragment extends Fragment {
 //        fragment.setArguments(args);
 //        return fragment;
 //    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
-//    }
+    }
 
-    RecyclerView recyclerView;
-    List<ProfileMyRecipeModel> profileCardList;
-    ProfileMyRecipesAdapter profileMyRecipesAdapter;
+    private RecyclerView recyclerView;
+    private List<RecipesViewerModel> profileCardList = new ArrayList<>();
+    private RecipesViewerAdapter recipesViewerAdapter;
+
+//    private String username;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile_my_recipes, container, false);
 
+        getRecipesFromDatabase();
         recyclerView = root.findViewById(R.id.profile_my_recipe_rec);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        profileCardList = new ArrayList<>();
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 1"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 2"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 3"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 4"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 5"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 6"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 7"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 8"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 9"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 10"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 11"));
-        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "END"));
 
-        profileMyRecipesAdapter = new ProfileMyRecipesAdapter(getActivity(), profileCardList);
-        recyclerView.setAdapter(profileMyRecipesAdapter);
         // Inflate the layout for this fragment
         return root;
+    }
+
+//    public void addRecipeToMyRecipe(RecipesViewerModel recipesViewerModel) {
+//        profileCardList.add(recipesViewerModel);
+//    }
+    private void getRecipesFromDatabase() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query = ref.child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("my_recipes");
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    profileCardList.clear();
+                    for (DataSnapshot dss : snapshot.getChildren()) {
+                        Recipe recipe = dss.getValue(Recipe.class);
+                        assert recipe != null;
+                        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
+                    }
+                }
+                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), profileCardList);
+                recyclerView.setAdapter(recipesViewerAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setNestedScrollingEnabled(false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

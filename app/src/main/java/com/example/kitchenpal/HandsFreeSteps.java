@@ -55,7 +55,7 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     private TextView textView;
     private int currStep = 0; //follow index of arraylist
     private final ArrayList<String> commands = new ArrayList<String>(Arrays.asList("next", "back"));
-    private ArrayList<String> steps = new ArrayList<String>(Arrays.asList("1. Add 50g flour", "2. Add 2 tbsp butter", "3. Add 20g cheese", "4. Heat the stove on high heat"));
+    private ArrayList<String> steps = new ArrayList<String>();
     String LOG_TAG = "HandsFreeActivity";
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
@@ -110,6 +110,9 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
                 toggleBack(v);
             }
         });
+
+        Intent in = getIntent();
+        steps = (ArrayList<String>) in.getExtras().getSerializable("step list");
 
         String thisStep = steps.get(currStep);
         textView = (TextView) findViewById(R.id.RecipeStep);
