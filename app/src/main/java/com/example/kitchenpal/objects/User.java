@@ -6,6 +6,7 @@ public class User {
     private String username, email;
     private ArrayList<Recipe> myRecipes, favourites;
 
+
     private enum proficiency {
         BEGINNER("Beginner"),
         INTERMEDIATE("Intermediate"),

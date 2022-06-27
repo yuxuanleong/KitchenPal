@@ -80,6 +80,7 @@ public class RecipeText extends Activity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(RecipeText.this, HandsFreeSteps.class);
+                in.putExtra("step list", stepList);
                 startActivity(in);
             }
         });
