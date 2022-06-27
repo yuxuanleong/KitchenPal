@@ -12,15 +12,16 @@ import android.view.ViewGroup;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.ProfileMyRecipesAdapter;
-import com.example.kitchenpal.models.RecipesViewerModel;
+import com.example.kitchenpal.models.ProfileMyRecipeModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A simple {@link Fragment} subclass.
+ * Use the {@link ProfileMyRecipesFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-
 public class ProfileMyRecipesFragment extends Fragment {
 
 //    // TODO: Rename parameter arguments, choose names that match
@@ -64,7 +65,7 @@ public class ProfileMyRecipesFragment extends Fragment {
 //    }
 
     RecyclerView recyclerView;
-    List<RecipesViewerModel> recipesCardList;
+    List<ProfileMyRecipeModel> profileCardList;
     ProfileMyRecipesAdapter profileMyRecipesAdapter;
 
     @Override
@@ -77,21 +78,21 @@ public class ProfileMyRecipesFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        recipesCardList = new ArrayList<>();
-        recipesCardList.add(new RecipesViewerModel(R.drawable.pizza, "mine 1", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.pizza, "mine 2", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.pizza, "mine 3", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.burger, "mine 4", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.fries, "mine 5", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.burger, "mine 6", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.fries, "mine 7", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.pizza, "mine 8", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.pizza, "mine 9", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.burger, "mine 10", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.burger, "mine 11", "me"));
-        recipesCardList.add(new RecipesViewerModel(R.drawable.fries, "END", "me"));
+        profileCardList = new ArrayList<>();
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 1"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 2"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 3"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 4"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 5"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 6"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "mine 7"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 8"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, "mine 9"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 10"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.burger, "mine 11"));
+        profileCardList.add(new ProfileMyRecipeModel(R.drawable.fries, "END"));
 
-        profileMyRecipesAdapter = new ProfileMyRecipesAdapter(getActivity(), recipesCardList);
+        profileMyRecipesAdapter = new ProfileMyRecipesAdapter(getActivity(), profileCardList);
         recyclerView.setAdapter(profileMyRecipesAdapter);
         // Inflate the layout for this fragment
         return root;

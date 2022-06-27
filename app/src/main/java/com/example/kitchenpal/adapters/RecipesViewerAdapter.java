@@ -1,17 +1,20 @@
 package com.example.kitchenpal.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
+import com.example.kitchenpal.RecipeText;
 import com.example.kitchenpal.models.RecipesViewerModel;
 
 import java.util.List;
@@ -33,9 +36,24 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.image.setImageResource(listModels.get(position).getImage());
-        holder.recipeName.setText(listModels.get(position).getRecipeName());
-        holder.createdBy.setText(listModels.get(position).getPublisher());
+        String name = listModels.get(position).getRecipeName();
+        String publisher = listModels.get(position).getPublisher();
+        int image  = listModels.get(position).getImage();
+        holder.image.setImageResource(image);
+        holder.recipeName.setText(name);
+        holder.createdBy.setText(publisher);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, listModels.get(position).getRecipeName(), Toast.LENGTH_SHORT).show();//
+                Intent intent = new Intent(context, RecipeText.class);
+                intent.putExtra("name", name);
+                intent.putExtra("publisher", publisher);
+                intent.putExtra("image", image);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

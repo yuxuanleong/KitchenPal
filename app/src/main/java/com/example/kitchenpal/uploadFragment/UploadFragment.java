@@ -2,6 +2,7 @@ package com.example.kitchenpal.uploadFragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,15 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.objects.Recipe;
+import com.example.kitchenpal.objects.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -72,10 +74,11 @@ public class UploadFragment extends Fragment {
 //    }
 
     EditText etRecipeName;
-    String recipeName;
+    String recipeName, publisher;
     Button buttonSubmit;
+    FirebaseAuth mAuth;
     FirebaseDatabase myDatabase;
-    DatabaseReference userRecipeRef;
+    DatabaseReference users_user_ref, recipes_sort_by_username_ref, recipes_sort_by_name_ref;
     AddStepFragment stepFrag = new AddStepFragment();;
     AddIngredientFragment ingreFrag = new AddIngredientFragment();;
     ArrayList<String> ingreList, stepList;
@@ -85,18 +88,30 @@ public class UploadFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_upload, container, false);
 
-        myDatabase = FirebaseDatabase.getInstance();
-        userRecipeRef = myDatabase.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser()
-                .getUid()).child("recipes");
-
         etRecipeName = root.findViewById(R.id.etRecipeName);
         buttonSubmit = root.findViewById(R.id.btnSubmit);
+        myDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        users_user_ref = myDatabase.getReference("users").child(mAuth.getCurrentUser()
+                .getUid());
+        recipes_sort_by_username_ref = myDatabase.getReference("recipes_sort_by_username");
+        recipes_sort_by_name_ref = myDatabase.getReference().child("recipes_sort_by_recipe_name");
 
-//        getChildFragmentManager().beginTransaction().add(R.id.frameLayoutUpload, new AddIngredientFragment(), "addIngreFragment").commit();
-//        getChildFragmentManager().beginTransaction().add(R.id.frameLayoutUpload, new AddStepFragment(), "addStepFragment").commit();
+        //get publisher
+        users_user_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    publisher = user.getUsername();
+                }
+            }
 
-//        stepFrag = (AddStepFragment) getChildFragmentManager().findFragmentByTag("addStepFragment");
-//        ingreFrag = (AddIngredientFragment) getChildFragmentManager().findFragmentByTag("addIngreFragment");
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         replaceFragment(ingreFrag);
 
@@ -107,7 +122,7 @@ public class UploadFragment extends Fragment {
                 stepList = stepFrag.getStepList();
                 ingreList = ingreFrag.getIngreList();
                 recipeName = etRecipeName.getText().toString();
-                Recipe recipe = new Recipe(recipeName, ingreList, stepList);
+                Recipe recipe = new Recipe(recipeName, publisher, ingreList, stepList);
                 addRecipeToDatabase(recipe);
             }
         });
@@ -125,10 +140,11 @@ public class UploadFragment extends Fragment {
 
 
     private void addRecipeToDatabase (Recipe recipe) {
-        userRecipeRef.child(recipe.getName()).setValue(recipe);
-//        userRecipeRef.child("Ingredients").setValue(recipe.getIngredientArrayList());
-//        userRecipeRef.child("Steps").setValue(recipe.getStepArrayList());
+        users_user_ref.child("my_recipes").child(recipe.getName()).setValue(recipe);
+        recipes_sort_by_username_ref.child(publisher).child(recipe.getName()).setValue(recipe);
+        recipes_sort_by_name_ref.child(recipe.getName()).setValue(recipe);
     }
+
     protected void replaceFragment(Fragment fragment) {
         FragmentManager fm = getChildFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

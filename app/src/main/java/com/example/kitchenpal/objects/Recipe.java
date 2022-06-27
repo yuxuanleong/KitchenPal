@@ -1,19 +1,18 @@
 package com.example.kitchenpal.objects;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Recipe {
 
-    private String name;
-    private ArrayList<String> ingredientArrayList;
-    private ArrayList<String> stepArrayList;
+    private String name, publisher;
+    private ArrayList<String> ingredientArrayList, stepArrayList;
 
     public Recipe() {
     }
 
-    public Recipe(String name, ArrayList<String> ingredientArrayList, ArrayList<String> stepArrayList) {
+    public Recipe(String name, String publisher, ArrayList<String> ingredientArrayList, ArrayList<String> stepArrayList) {
         this.name = name;
+        this.publisher = publisher;
         this.ingredientArrayList = ingredientArrayList;
         this.stepArrayList = stepArrayList;
     }
@@ -40,5 +39,13 @@ public class Recipe {
 
     public void setStepArrayList(ArrayList<String> stepArrayList) {
         this.stepArrayList = stepArrayList;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

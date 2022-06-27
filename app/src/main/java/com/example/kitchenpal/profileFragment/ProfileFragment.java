@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.objects.User;
-import com.example.kitchenpal.adapters.VPA;
+import com.example.kitchenpal.adapters.ViewpagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,7 +73,7 @@ public class ProfileFragment extends Fragment {
         tabLayout = view.findViewById(R.id.profileTabLayout);
         viewpager = view.findViewById(R.id.viewPager);
 
-        VPA vpa = new VPA(getChildFragmentManager(),getLifecycle());
+        ViewpagerAdapter vpa = new ViewpagerAdapter(getChildFragmentManager(),getLifecycle());
         vpa.addFragments(new ProfileFavouritesFragment(), " Favourites");
         vpa.addFragments(new ProfileMyRecipesFragment(),"My Recipes");
         viewpager.setAdapter(vpa);

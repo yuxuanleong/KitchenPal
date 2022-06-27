@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.adapters.ProfileFavAdapter;
+import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.RecipesViewerModel;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class ProfileFavouritesFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<RecipesViewerModel> profileCardList;
-    ProfileFavAdapter profileFavAdapter;
+    RecipesViewerAdapter recipesViewerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,20 +78,13 @@ public class ProfileFavouritesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         profileCardList = new ArrayList<>();
-        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 1", "user"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 2", "user"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 3", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 4", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "liked 5", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 6", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "liked 7", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 8", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, "liked 9", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.burger, "liked 10", "name"));
-        profileCardList.add(new RecipesViewerModel(R.drawable.fries, "END", "name"));
+        profileCardList.add((new RecipesViewerModel(R.drawable.burger, "Mushroom Burger", "shakeshac")));
+        profileCardList.add((new RecipesViewerModel(R.drawable.fries, "Shoestring Fries", "randomcafe")));
+        profileCardList.add((new RecipesViewerModel(R.drawable.pizza, "Burrata Pizza", "LINO's")));
 
-        profileFavAdapter = new ProfileFavAdapter(getActivity(), profileCardList);
-        recyclerView.setAdapter(profileFavAdapter);
+
+        RecipesViewerAdapter recipesViewerAdapter= new RecipesViewerAdapter(getActivity(), profileCardList);
+        recyclerView.setAdapter(recipesViewerAdapter);
         // Inflate the layout for this fragment
         return root;
     }
