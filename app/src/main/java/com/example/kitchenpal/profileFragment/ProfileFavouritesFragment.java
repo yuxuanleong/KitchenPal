@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.RecipesViewerModel;
@@ -101,7 +102,7 @@ public class ProfileFavouritesFragment extends Fragment {
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
                         assert recipe != null;
-                        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
+                        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher(), true));
                     }
                 }
                 recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), profileCardList);

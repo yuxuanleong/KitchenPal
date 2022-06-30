@@ -1,11 +1,9 @@
 package com.example.kitchenpal.recipesFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,14 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kitchenpal.RecipeText;
+import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.RecipesViewerModel;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.objects.Recipe;
@@ -44,6 +40,8 @@ public class RecipesFragment extends Fragment {
     private RecyclerView recipesViewer;
     private List<RecipesViewerModel> recipesViewerModelList = new ArrayList<>();
     private RecipesViewerAdapter recipesViewerAdapter;
+    private boolean isFavouriteRecipe;
+    private List<Boolean> isFavArray = new ArrayList<>();
 
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -134,7 +132,6 @@ public class RecipesFragment extends Fragment {
     private void getRecipesFromDatabase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Query query = ref.child("recipes_sort_by_recipe_name");
-
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -142,17 +139,27 @@ public class RecipesFragment extends Fragment {
                     recipesViewerModelList.clear();
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
-                        assert recipe != null;
-//                        Toast.makeText(getActivity(), recipe.getName(), Toast.LENGTH_SHORT).show();
-                        recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
+                        checkIfFavourites(recipe, new FirebaseSuccessListener() {
+                            @Override
+                            public void onDataFound(boolean isDataFetched) {
+                                if (isDataFetched) {
+                                    recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+                                    recipesViewer.setAdapter(recipesViewerAdapter);
+                                    recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                                    recipesViewer.setHasFixedSize(true);
+                                    recipesViewer.setNestedScrollingEnabled(false);
+                                }
+                            }
+                        });
                     }
                 }
-                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
-                recipesViewer.setAdapter(recipesViewerAdapter);
-                recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                recipesViewer.setHasFixedSize(true);
-                recipesViewer.setNestedScrollingEnabled(false);
+//                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+//                recipesViewer.setAdapter(recipesViewerAdapter);
+//                recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
+//
+//                recipesViewer.setHasFixedSize(true);
+//                recipesViewer.setNestedScrollingEnabled(false);
             }
 
             @Override
@@ -161,4 +168,27 @@ public class RecipesFragment extends Fragment {
             }
         });
     }
+
+    public void checkIfFavourites(Recipe recipe, FirebaseSuccessListener dataFetched) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("favourites");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(recipe.getName())) {
+                    recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher(), true));
+                } else {
+                    recipesViewerModelList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher(), false));
+                }
+                dataFetched.onDataFound(true);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
