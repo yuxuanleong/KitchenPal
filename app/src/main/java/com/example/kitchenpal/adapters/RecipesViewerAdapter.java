@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -18,18 +17,16 @@ import com.example.kitchenpal.R;
 import com.example.kitchenpal.RecipeText;
 import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.Recipe;
-import com.example.kitchenpal.objects.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import java.util.List;
 
-public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdapter.ViewHolder>{
+public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdapter.ViewHolder> {
     Context context;
     List<RecipesViewerModel> listModels;
 
@@ -41,7 +38,7 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recipes_recipeview, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_recipes, parent, false));
     }
 
     @Override
@@ -123,7 +120,6 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
             recipeName = itemView.findViewById(R.id.recipeName);
             createdBy = itemView.findViewById(R.id.createdBy);
             likeButton = (ToggleButton) itemView.findViewById(R.id.likeButton);
-
         }
     }
 
