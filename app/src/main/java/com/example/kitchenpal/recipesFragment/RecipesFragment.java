@@ -29,37 +29,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-///**
-// * A simple {@link Fragment} subclass.
-// * Use the {@link RecipesFragment#newInstance} factory method to
-// * create an instance of this fragment.
-// */
 public class RecipesFragment extends Fragment {
     private SearchView searchView;
 
     private RecyclerView recipesViewer;
     private List<RecipesViewerModel> recipesViewerModelList = new ArrayList<>();
     private RecipesViewerAdapter recipesViewerAdapter;
-    private boolean isFavouriteRecipe;
-    private List<Boolean> isFavArray = new ArrayList<>();
-
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    private String mParam1;
-//    private String mParam2;
 
     public RecipesFragment() {
         // Required empty public constructor
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inflate the layout for this fragment
+
         View root = inflater.inflate(R.layout.fragment_recipes, container, false);
+
+        //initialise recycler view
         recipesViewer = root.findViewById(R.id.recipeView);
 
         //search function
@@ -94,39 +87,15 @@ public class RecipesFragment extends Fragment {
         });
 
         getRecipesFromDatabase();
-//        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
-//        recipesViewer.setAdapter(recipesViewerAdapter);
-//        recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,false));
-//        recipesViewer.setHasFixedSize(true);
+
+        //set an empty adapter
+        recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
+        recipesViewer.setAdapter(recipesViewerAdapter);
+
+        recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,false));
+        recipesViewer.setHasFixedSize(true);
 
         return root;
-    }
-
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment RecipesFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static RecipesFragment newInstance(String param1, String param2) {
-//        RecipesFragment fragment = new RecipesFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     private void getRecipesFromDatabase() {
@@ -140,26 +109,18 @@ public class RecipesFragment extends Fragment {
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
                         checkIfFavourites(recipe, new FirebaseSuccessListener() {
-                            @Override
+                            @Override  
                             public void onDataFound(boolean isDataFetched) {
                                 if (isDataFetched) {
+
+                                    //update adapter after data is fetched
                                     recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
                                     recipesViewer.setAdapter(recipesViewerAdapter);
-                                    recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                                    recipesViewer.setHasFixedSize(true);
-                                    recipesViewer.setNestedScrollingEnabled(false);
                                 }
                             }
                         });
                     }
                 }
-//                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), recipesViewerModelList);
-//                recipesViewer.setAdapter(recipesViewerAdapter);
-//                recipesViewer.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//                recipesViewer.setHasFixedSize(true);
-//                recipesViewer.setNestedScrollingEnabled(false);
             }
 
             @Override
