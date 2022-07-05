@@ -49,9 +49,13 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
         String name = listModels.get(position).getRecipeName();
         String publisher = listModels.get(position).getPublisher();
         int image  = listModels.get(position).getImage();
+        boolean isFavourites = listModels.get(position).isFavourite();
+
+        //set the relevant information
         holder.image.setImageResource(image);
         holder.recipeName.setText(name);
         holder.createdBy.setText(publisher);
+        holder.likeButton.setChecked(isFavourites);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
