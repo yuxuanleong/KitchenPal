@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +32,7 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
     @NonNull
     @Override
     public ProfileMyRecipesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ProfileMyRecipesAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_my_recipe_view, parent, false));
+        return new ProfileMyRecipesAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_profile_my_recipe, parent, false));
     }
 
     @Override

@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kitchenpal.profileFragment.ProfileFragment;
 import com.example.kitchenpal.recipesFragment.RecipesFragment;
-import com.example.kitchenpal.toDo.PantryFragment;
+import com.example.kitchenpal.pantryFragment.PantryFragment;
 import com.example.kitchenpal.uploadFragment.UploadFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

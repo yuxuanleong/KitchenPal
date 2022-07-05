@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class RecipesFragment extends Fragment {
+
     private SearchView searchView;
 
     private RecyclerView recipesViewer;
