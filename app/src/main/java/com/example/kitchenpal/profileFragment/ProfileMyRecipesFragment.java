@@ -78,8 +78,8 @@ public class ProfileMyRecipesFragment extends Fragment {
     }
 
     private RecyclerView recyclerView;
-    private List<RecipesViewerModel> profileCardList = new ArrayList<>();
-    private RecipesViewerAdapter recipesViewerAdapter;
+    private List<ProfileMyRecipeModel> profileCardList = new ArrayList<>();
+    private ProfileMyRecipesAdapter recipesViewerAdapter;
 
 //    private String username;
 
@@ -113,10 +113,10 @@ public class ProfileMyRecipesFragment extends Fragment {
                     for (DataSnapshot dss : snapshot.getChildren()) {
                         Recipe recipe = dss.getValue(Recipe.class);
                         assert recipe != null;
-                        profileCardList.add(new RecipesViewerModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
+                        profileCardList.add(new ProfileMyRecipeModel(R.drawable.pizza, recipe.getName(), recipe.getPublisher()));
                     }
                 }
-                recipesViewerAdapter = new RecipesViewerAdapter(getActivity(), profileCardList);
+                recipesViewerAdapter = new ProfileMyRecipesAdapter(getActivity(), profileCardList);
                 recyclerView.setAdapter(recipesViewerAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
