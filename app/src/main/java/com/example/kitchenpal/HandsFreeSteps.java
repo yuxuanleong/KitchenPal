@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,8 +58,9 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     private final ArrayList<String> commands = new ArrayList<String>(Arrays.asList("next", "back"));
     private ArrayList<String> steps = new ArrayList<String>();
 
-    private ImageButton exitButton;
+    private ImageView exitButton;
     private Button nextButton, backButton;
+    private TextView stepNum;
     String LOG_TAG = "HandsFreeActivity";
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
@@ -93,9 +95,11 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Initialise UI
-        exitButton = (ImageButton) findViewById(R.id.exit_button);
+        exitButton = (ImageView) findViewById(R.id.exit_button);
         nextButton = (Button) findViewById(R.id.nextButton);
         backButton = (Button) findViewById(R.id.handsFreeBackButton);
+        stepNum = (TextView) findViewById(R.id.step_number);
+        stepNum.setText("Step 1");
 
         exitButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
@@ -230,16 +234,20 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     }
 
     //switch to next step
+    @SuppressLint("SetTextI18n")
     public void toggleNext(View view) {
         this.currStep++;
+        stepNum.setText("Step " + String.valueOf(currStep + 1));
         if (!(currStep > steps.size() - 1)) {
             textView.setText(steps.get(currStep));
         }
     }
 
     //switch to prev step
+    @SuppressLint("SetTextI18n")
     public void toggleBack(View view) {
         this.currStep--;
+        stepNum.setText("Step " + String.valueOf(currStep + 1));
         if(!(currStep < 0)) {
             textView.setText(steps.get(currStep));
         }

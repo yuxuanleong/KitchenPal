@@ -109,7 +109,7 @@ public class RecipeText extends Activity {
                     StringBuilder stringBuilder = new StringBuilder();
 
                     for (String eachIngre : ingreList) {
-                        stringBuilder.append(eachIngre).append("\n");
+                        stringBuilder.append(eachIngre).append("\n\n");
                     }
 
                     ingrePara = stringBuilder.toString();
@@ -134,14 +134,14 @@ public class RecipeText extends Activity {
 
                     stepList.clear();
                     for (DataSnapshot dss : snapshot.getChildren()) {
-                        String ingre = dss.getValue(String.class);
-                        stepList.add(ingre);
+                        String step = dss.getValue(String.class);
+                        stepList.add(step);
                     }
 
                     StringBuilder stringBuilder = new StringBuilder();
 
-                    for (String eachIngre : stepList) {
-                        stringBuilder.append(eachIngre).append("\n");
+                    for (int i = 0; i < stepList.size(); i++) {
+                        stringBuilder.append(i + 1+". ").append(stepList.get(i)).append("\n\n");
                     }
 
                     stepPara = stringBuilder.toString();
