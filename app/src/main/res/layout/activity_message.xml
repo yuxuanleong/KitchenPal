@@ -1,60 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pantryFragment.PantryFragment">
+    tools:context=".messageFragment.MessageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/header"
+                android:id="@+id/messages_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pantry"
-                android:textSize="40sp"
-                android:padding="5dp"
-                android:fontFamily="@font/sofia_regular"
+                android:layout_marginTop="15dp"
+                android:text="Messages"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="30sp"
+                android:fontFamily="@font/sofia_regular"/>
+
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar_pantry"
+                android:id="@+id/message_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_bar_bg"
+                android:layout_margin="15dp"
+                android:layout_marginTop="0dp"
                 android:elevation="10dp"
-                app:iconifiedByDefault="false"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/search_bar_bg"
+                app:layout_constraintTop_toBottomOf="@+id/messages_header"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header"
-                app:queryHint="Type search here"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:queryHint="Search by username"
                 app:queryBackground="@null"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pantry_items"
+                android:id="@+id/messages_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/message_search_bar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_bar_pantry" />
-
+                android:layout_margin="10dp"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
-</FrameLayout>
+</LinearLayout>

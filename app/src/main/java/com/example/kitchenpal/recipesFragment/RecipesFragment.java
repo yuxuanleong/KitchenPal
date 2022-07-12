@@ -81,6 +81,7 @@ public class RecipesFragment extends Fragment {
 
                 if (filteredList.isEmpty()) {
                     Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
+                    recipesViewerAdapter.setFilteredList(recipesViewerModelList);
                 } else {
                     recipesViewerAdapter.setFilteredList(filteredList);
                 }
