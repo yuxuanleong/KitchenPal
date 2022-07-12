@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,12 +41,12 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         holder.itemName.setText(modelList.get(position).getItemName());
         holder.condition.setText(modelList.get(position).getCondition());
 
-        holder.chatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        holder.chatButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
     }
 
@@ -58,7 +59,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
 
         ImageView image;
         TextView itemName, publisher, condition;
-        Button chatButton;
+        ToggleButton chatButton;
 
         public ViewHolder(View v) {
             super(v);

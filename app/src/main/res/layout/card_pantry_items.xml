@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="9dp"
     app:cardCornerRadius="50dp"
@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_pantry"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="255dp"
 
         android:background="@drawable/rounded_bg">
 
@@ -30,8 +30,8 @@
             android:id="@+id/item_name_pantry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-
+            android:layout_marginStart="18dp"
+            android:layout_margin="10dp"
             android:text="Item name"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -47,7 +47,7 @@
             android:id="@+id/condition_pantry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:layout_marginBottom="15dp"
             android:text="Condition"
             android:textColor="@color/black"
             android:textSize="15sp"
@@ -58,7 +58,7 @@
             android:id="@+id/publisher_pantry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:layout_marginBottom="15dp"
             android:text="By User"
             android:textColor="@color/black"
             android:textSize="15sp"
