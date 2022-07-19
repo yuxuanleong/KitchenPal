@@ -67,7 +67,7 @@ public class RecipesFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
+                recipesViewerAdapter.getFilter().filter(newText);
                 return false;
             }
 
