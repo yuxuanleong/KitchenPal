@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ import org.w3c.dom.Text;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class HandsFreeSteps extends AppCompatActivity implements RecognitionListener{
+public class HandsFreeSteps extends AppCompatActivity implements RecognitionListener, View.OnClickListener {
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
     private SpeechRecognizer speech = null;
     private Intent intentRecognizer;
@@ -56,6 +57,10 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     private int currStep = 0; //follow index of arraylist
     private final ArrayList<String> commands = new ArrayList<String>(Arrays.asList("next", "back"));
     private ArrayList<String> steps = new ArrayList<String>();
+
+    private ImageView exitButton;
+    private Button nextButton, backButton;
+    private TextView stepNum;
     String LOG_TAG = "HandsFreeActivity";
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
@@ -90,31 +95,21 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Initialise UI
-        ImageButton exitButton = (ImageButton) findViewById(R.id.exit_button);
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { finish(); }
-        });
-        Button nextButton = (Button) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleNext(v);
-            }
-        });
+        exitButton = (ImageView) findViewById(R.id.exit_button);
+        nextButton = (Button) findViewById(R.id.nextButton);
+        backButton = (Button) findViewById(R.id.handsFreeBackButton);
+        stepNum = (TextView) findViewById(R.id.step_number);
+        stepNum.setText("Step 1");
 
-        Button backButton = (Button) findViewById(R.id.handsFreeBackButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleBack(v);
-            }
-        });
+        exitButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
 
         Intent in = getIntent();
         steps = (ArrayList<String>) in.getExtras().getSerializable("step list");
 
         String thisStep = steps.get(currStep);
+        setButtonsVisibility();
         textView = (TextView) findViewById(R.id.RecipeStep);
         textView.setText(thisStep);
 
@@ -239,18 +234,61 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     }
 
     //switch to next step
+    @SuppressLint("SetTextI18n")
     public void toggleNext(View view) {
         this.currStep++;
+        stepNum.setText("Step " + String.valueOf(currStep + 1));
         if (!(currStep > steps.size() - 1)) {
             textView.setText(steps.get(currStep));
         }
     }
 
     //switch to prev step
+    @SuppressLint("SetTextI18n")
     public void toggleBack(View view) {
         this.currStep--;
+        stepNum.setText("Step " + String.valueOf(currStep + 1));
         if(!(currStep < 0)) {
             textView.setText(steps.get(currStep));
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.exit_button:
+                finish();
+                break;
+            case R.id.nextButton:
+                toggleNext(view);
+                setButtonsVisibility();
+                break;
+            case R.id.handsFreeBackButton:
+                toggleBack(view);
+                setButtonsVisibility();
+                break;
+        }
+    }
+
+    private void setButtonsVisibility() {
+        if (currStep == 0) {
+            exitButton.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.INVISIBLE);
+            nextButton.setVisibility(View.VISIBLE);
+        } else if (currStep == steps.size() - 1) {
+            exitButton.setVisibility(View.INVISIBLE);
+            backButton.setVisibility(View.VISIBLE);
+            nextButton.setText("FINISH");
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+        } else {
+            exitButton.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.VISIBLE);
+            nextButton.setVisibility(View.VISIBLE);
         }
     }
 }
