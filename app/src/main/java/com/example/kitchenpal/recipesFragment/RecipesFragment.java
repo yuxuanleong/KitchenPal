@@ -70,22 +70,6 @@ public class RecipesFragment extends Fragment {
                 recipesViewerAdapter.getFilter().filter(newText);
                 return false;
             }
-
-            private void filterList(String newText) {
-                List<RecipesViewerModel> filteredList = new ArrayList<RecipesViewerModel>();
-                for (RecipesViewerModel recipe :  recipesViewerModelList) {
-                    if (recipe.getRecipeName().toLowerCase().contains(newText.toLowerCase())) {
-                        filteredList.add(recipe);
-                    }
-                }
-
-                if (filteredList.isEmpty()) {
-                    Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
-                    recipesViewerAdapter.setFilteredList(recipesViewerModelList);
-                } else {
-                    recipesViewerAdapter.setFilteredList(filteredList);
-                }
-            }
         });
 
         getRecipesFromDatabase();
@@ -124,7 +108,6 @@ public class RecipesFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

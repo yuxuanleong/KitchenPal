@@ -62,12 +62,7 @@ public class PantryFragment extends Fragment {
                         filteredList.add(item);
                     }
                 }
-
-                if (filteredList.isEmpty()) {
-                    Toast.makeText(getActivity(), "No data found", Toast.LENGTH_SHORT).show();
-                } else {
-                    pantryItemsAdapter.setFilteredList(filteredList);
-                }
+                pantryItemsAdapter.setFilteredList(filteredList);
             }
         });
 

@@ -16,7 +16,7 @@
         android:background="@drawable/rounded_bg">
 
         <ImageView
-            android:id="@+id/pantry_image"
+            android:id="@+id/requests_image"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="center"
@@ -27,7 +27,7 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/item_name_pantry"
+            android:id="@+id/requests_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -40,44 +40,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pantry_image"
+            app:layout_constraintTop_toBottomOf="@+id/requests_image"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/condition_pantry"
+            android:id="@+id/requests_condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="Condition"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/item_name_pantry"
-            app:layout_constraintTop_toBottomOf="@+id/item_name_pantry" />
+            app:layout_constraintStart_toStartOf="@+id/requests_item_name"
+            app:layout_constraintTop_toBottomOf="@+id/requests_item_name" />
 
         <TextView
-            android:id="@+id/publisher_pantry"
+            android:id="@+id/requests_publisher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="By User"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/item_name_pantry"
-            app:layout_constraintTop_toBottomOf="@+id/condition_pantry" />
-
-        <TextView
-            android:id="@+id/request_button"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="28dp"
-            android:background="@drawable/request_outline"
-            android:text="REQUEST"
-            android:textSize="16sp"
-            android:textColor="@color/green"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
+            app:layout_constraintStart_toStartOf="@+id/requests_condition"
+            app:layout_constraintTop_toBottomOf="@+id/requests_condition" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

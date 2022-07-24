@@ -74,7 +74,6 @@ public class Login extends AppCompatActivity {
                         } else {
                             authenticateUser(email, password);
                         }
-
                     }
                 });
     }
