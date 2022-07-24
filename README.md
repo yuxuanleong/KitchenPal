@@ -2,7 +2,7 @@
 
 ## Prerequisites
 * Android Phone[^1]
-* Android Studio - [Download and install](https://www.google.com/aclk?sa=l&ai=DChcSEwjziL-phM74AhXKfSsKHYmCBP8YABAAGgJzZg&sig=AOD64_1dzA6n6U6xIgEgkz3HSsRO-Y863w&q&adurl&ved=2ahUKEwjPkLiphM74AhVZ4jgGHd_NBgAQ0Qx6BAgCEAE) Notes that Android Studio takes up ~2.0GB
+* Android Studio - [Download and install](https://www.google.com/aclk?sa=l&ai=DChcSEwjziL-phM74AhXKfSsKHYmCBP8YABAAGgJzZg&sig=AOD64_1dzA6n6U6xIgEgkz3HSsRO-Y863w&q&adurl&ved=2ahUKEwjPkLiphM74AhVZ4jgGHd_NBgAQ0Qx6BAgCEAE) Note that Android Studio takes up ~2.0GB
 
 ## Clone project from Github in Android Studio
 1. Go to **File > New > Project from Version Control...**

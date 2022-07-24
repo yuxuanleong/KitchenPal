@@ -59,7 +59,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
 
         ImageView image;
         TextView itemName, publisher, condition;
-        ToggleButton chatButton;
+        Button chatButton;
 
         public ViewHolder(View v) {
             super(v);
