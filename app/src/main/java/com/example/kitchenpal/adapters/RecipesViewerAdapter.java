@@ -17,9 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.RecipeText;
 import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.Recipe;
+import com.example.kitchenpal.recipesFragment.RecipeText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

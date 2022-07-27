@@ -140,6 +140,10 @@ public class SignUp extends AppCompatActivity{
                         if(task.isSuccessful()) {
                             User user = new User(username, email, null, null);
 
+                            FirebaseDatabase.getInstance().getReference("users_sort_by_username")
+                                    .child(username)
+                                    .setValue(user);
+
                             FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

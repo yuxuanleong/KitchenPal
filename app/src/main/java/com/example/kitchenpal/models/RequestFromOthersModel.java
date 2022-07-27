@@ -1,19 +1,17 @@
 package com.example.kitchenpal.models;
 
-public class PantryItemsModel {
+public class RequestFromOthersModel {
 
     int image;
     String itemName;
-    String publisher;
+    String requester;
     String condition;
-    boolean isRequested;
 
-    public PantryItemsModel(int image, String itemName, String publisher, String condition, boolean bool) {
+    public RequestFromOthersModel(int image, String itemName, String requester, String condition) {
         this.image = image;
         this.itemName = itemName;
-        this.publisher = publisher;
+        this.requester = requester;
         this.condition = condition;
-        this.isRequested = bool;
     }
 
     public int getImage() {
@@ -24,15 +22,11 @@ public class PantryItemsModel {
         return itemName;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getRequester() {
+        return requester;
     }
 
     public String getCondition() {
         return condition;
-    }
-
-    public boolean isRequested() {
-        return isRequested;
     }
 }

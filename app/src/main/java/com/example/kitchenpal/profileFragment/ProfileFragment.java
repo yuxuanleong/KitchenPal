@@ -49,9 +49,13 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
         addFragment(view);
+
         profileUsername = view.findViewById(R.id.profileUsername);
+
         Button logoutBtn = view.findViewById(R.id.logoutButton);
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +94,7 @@ public class ProfileFragment extends Fragment {
         ViewpagerAdapter vpa = new ViewpagerAdapter(getChildFragmentManager(),getLifecycle());
         vpa.addFragments(new ProfileFavouritesFragment(), " Favourites");
         vpa.addFragments(new ProfileMyRecipesFragment(),"My Recipes");
+        vpa.addFragments(new ProfileMyItemsFragment(), "My Items");
         viewpager.setAdapter(vpa);
         new TabLayoutMediator(tabLayout, viewpager, (tab, pos) -> tab.setText(vpa.getTitles(pos))).attach();
     }

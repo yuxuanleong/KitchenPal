@@ -5,18 +5,18 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="9dp"
-    app:cardCornerRadius="50dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_pantry"
+        android:id="@+id/constraintLayout_request_pending_accepted"
         android:layout_width="match_parent"
         android:layout_height="255dp"
 
         android:background="@drawable/rounded_bg">
 
         <ImageView
-            android:id="@+id/requests_image"
+            android:id="@+id/request_pending_accepted_image"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="center"
@@ -27,42 +27,54 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/requests_item_name"
+            android:id="@+id/item_name_request_pending_accepted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_margin="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/roboto_bold"
             android:text="Item name"
             android:textColor="@color/black"
             android:textSize="25sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requests_image"
+            app:layout_constraintTop_toBottomOf="@+id/request_pending_accepted_image"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/requests_condition"
+            android:id="@+id/condition_request_pending_accepted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/roboto_regular"
             android:text="Condition"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/requests_item_name"
-            app:layout_constraintTop_toBottomOf="@+id/requests_item_name" />
+            app:layout_constraintStart_toStartOf="@+id/item_name_request_pending_accepted"
+            app:layout_constraintTop_toBottomOf="@+id/item_name_request_pending_accepted" />
 
         <TextView
-            android:id="@+id/requests_publisher"
+            android:id="@+id/publisher_request_pending_accepted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:fontFamily="@font/roboto_regular"
             android:text="By User"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/requests_condition"
-            app:layout_constraintTop_toBottomOf="@+id/requests_condition" />
+            app:layout_constraintStart_toStartOf="@+id/item_name_request_pending_accepted"
+            app:layout_constraintTop_toBottomOf="@+id/condition_request_pending_accepted" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/del_button"
+            android:layout_width="38dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
