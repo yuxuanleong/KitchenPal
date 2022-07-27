@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.RecipeText;
 import com.example.kitchenpal.models.ProfileMyRecipeModel;
+import com.example.kitchenpal.recipesFragment.RecipeText;
 
 import java.util.List;
 

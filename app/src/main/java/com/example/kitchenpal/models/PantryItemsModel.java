@@ -6,12 +6,14 @@ public class PantryItemsModel {
     String itemName;
     String publisher;
     String condition;
+    boolean isRequested;
 
-    public PantryItemsModel(int image, String itemName, String publisher, String condition) {
+    public PantryItemsModel(int image, String itemName, String publisher, String condition, boolean bool) {
         this.image = image;
         this.itemName = itemName;
         this.publisher = publisher;
         this.condition = condition;
+        this.isRequested = bool;
     }
 
     public int getImage() {
@@ -28,5 +30,9 @@ public class PantryItemsModel {
 
     public String getCondition() {
         return condition;
+    }
+
+    public boolean isRequested() {
+        return isRequested;
     }
 }

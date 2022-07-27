@@ -5,8 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="9dp"
-    app:cardCornerRadius="50dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_pantry"
@@ -30,8 +30,9 @@
             android:id="@+id/item_name_pantry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_margin="10dp"
+            android:layout_marginStart="5dp"
+
+            android:layout_marginTop="7dp"
             android:text="Item name"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -49,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="Condition"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/item_name_pantry"
             app:layout_constraintTop_toBottomOf="@+id/item_name_pantry" />
@@ -60,18 +61,23 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="By User"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/item_name_pantry"
             app:layout_constraintTop_toBottomOf="@+id/condition_pantry" />
 
-        <Button
-            android:id="@+id/chat_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="28dp"
-            android:background="@drawable/ic_baseline_chat_bubble_outline_24"
+        <TextView
+            android:id="@+id/request_button"
+            android:layout_width="86dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/request_outline"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="REQUEST"
+            android:textColor="@color/green"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

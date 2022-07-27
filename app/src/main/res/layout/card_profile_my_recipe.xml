@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="9dp"
-    app:cardCornerRadius="50dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_myrecipe"
@@ -30,7 +30,7 @@
             android:id="@+id/recipeName_myrecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:text="Recipe name"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="By User"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/recipeName_myrecipe"
             app:layout_constraintTop_toBottomOf="@+id/recipeName_myrecipe" />

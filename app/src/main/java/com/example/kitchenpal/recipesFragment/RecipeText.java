@@ -1,4 +1,4 @@
-package com.example.kitchenpal;
+package com.example.kitchenpal.recipesFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.example.kitchenpal.FirebaseHelper;
+import com.example.kitchenpal.FirebaseSuccessListener;
+import com.example.kitchenpal.HandsFreeSteps;
+import com.example.kitchenpal.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +59,17 @@ public class RecipeText extends Activity {
         String recipeName = intent.getExtras().getString("name");
         String publisher = intent.getExtras().getString("publisher");
 
+        FirebaseHelper.getCurrUsernameData(new FirebaseSuccessListener() {
+            @Override
+            public void onDataFound(boolean isDataFetched) {
+                if(isDataFetched) {
+                    String getUsername = FirebaseHelper.getCurrUsername();
+                    if(getUsername.equals(publisher)) {
+
+                    }
+                }
+            }
+        });
 
         //get ingredient list and step list from firebase
         ingreRef = FirebaseDatabase.getInstance().getReference("recipes_sort_by_username")

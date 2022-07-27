@@ -6,17 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.RecipeText;
 import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.Recipe;
+import com.example.kitchenpal.recipesFragment.RecipeText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,15 +27,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FilterReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdapter.ViewHolder> {
+public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdapter.ViewHolder> implements Filterable {
     Context context;
-    List<RecipesViewerModel> listModels;
+    private List<RecipesViewerModel> listModels;
+    private List<RecipesViewerModel> listModelsFull;
 
     public RecipesViewerAdapter(Context context, List<RecipesViewerModel> list) {
         this.context = context;
         this.listModels = list;
+        listModelsFull = new ArrayList<>(listModels);
     }
 
     @NonNull
@@ -122,6 +130,40 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
             likeButton = (ToggleButton) itemView.findViewById(R.id.likeButton);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return recipesFilter;
+    }
+
+    private Filter recipesFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<RecipesViewerModel> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0) {
+                filteredList.addAll(listModelsFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (RecipesViewerModel model : listModelsFull) {
+                    if (model.getRecipeName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(model);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listModels.clear();
+            listModels.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public void setFilteredList(List<RecipesViewerModel> filteredList) {
         this.listModels= filteredList;
