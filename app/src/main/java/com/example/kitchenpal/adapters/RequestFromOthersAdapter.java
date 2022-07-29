@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.models.PantryItemsModel;
 import com.example.kitchenpal.models.RequestFromOthersModel;
 import com.example.kitchenpal.objects.PantryItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -59,6 +57,7 @@ public class RequestFromOthersAdapter extends RecyclerView.Adapter<RequestFromOt
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, "Request accepted", Toast.LENGTH_SHORT).show();
                 FirebaseDatabase.getInstance().getReference()
                         .child("users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

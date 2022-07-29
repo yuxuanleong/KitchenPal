@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -13,13 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.FirebaseSuccessListener;
+import com.example.kitchenpal.R;
 import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.RecipesViewerModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.kitchenpal.R;
 import com.example.kitchenpal.objects.Recipe;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesFragment extends Fragment {
 
@@ -86,14 +84,19 @@ public class RecipesFragment extends Fragment {
 
     private void getRecipesFromDatabase() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
         Query query = ref.child("recipes_sort_by_recipe_name");
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     recipesViewerModelList.clear();
                     for (DataSnapshot dss : snapshot.getChildren()) {
+
                         Recipe recipe = dss.getValue(Recipe.class);
+
                         checkIfFavourites(recipe, new FirebaseSuccessListener() {
                             @Override  
                             public void onDataFound(boolean isDataFetched) {

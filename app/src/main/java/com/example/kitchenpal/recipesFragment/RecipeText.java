@@ -1,15 +1,18 @@
 package com.example.kitchenpal.recipesFragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 
 import com.example.kitchenpal.FirebaseHelper;
@@ -28,12 +31,13 @@ import java.util.ArrayList;
 public class RecipeText extends Activity {
     private ImageButton back;
     private Button handsFree;
+    private Button deleteBtn;
     private CardView recipeImage;
     private TextView tvIngre, tvStep, tvName, tvPublisher;
     private ArrayList<String> ingreList = new ArrayList<>();
     private ArrayList<String> stepList = new ArrayList<>();
     private DatabaseReference ingreRef, stepRef;
-    private String ingrePara, stepPara;
+    private String ingrePara, stepPara, publisher, recipeName;
 
     public RecipeText() {
         //mandatory public constructor
@@ -52,26 +56,61 @@ public class RecipeText extends Activity {
         tvStep = (TextView) findViewById(R.id.RecipeInstructions);
         tvName = (TextView) findViewById(R.id.recipe_name);
         tvPublisher = (TextView) findViewById(R.id.publishedBy);
-
+        deleteBtn = findViewById(R.id.del_recipe);
 
         //get recipe name, publisher from recipe card view
         Intent intent = getIntent();
-        String recipeName = intent.getExtras().getString("name");
-        String publisher = intent.getExtras().getString("publisher");
+        recipeName = intent.getExtras().getString("name");
+        publisher = intent.getExtras().getString("publisher");
 
         FirebaseHelper.getCurrUsernameData(new FirebaseSuccessListener() {
             @Override
             public void onDataFound(boolean isDataFetched) {
                 if(isDataFetched) {
                     String getUsername = FirebaseHelper.getCurrUsername();
-                    if(getUsername.equals(publisher)) {
+                    if(getUsername.equals(publisher)){
+                        deleteBtn.setVisibility(View.VISIBLE);
+                        
+                        deleteBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Dialog dialog = new Dialog(view.getContext());
+                                dialog.setContentView(R.layout.confirm_del);
+                                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
+                                dialog.getWindow().setLayout(1050, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                dialog.setCancelable(false);
 
+                                AppCompatButton del = dialog.findViewById(R.id.del_dialog_del);
+                                AppCompatButton cancel = dialog.findViewById(R.id.del_dialog_cancel);
+                                TextView itemName = dialog.findViewById(R.id.things_to_be_del);
+
+                                itemName.setText(recipeName + "?");
+
+                                cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                del.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        deleteItem(recipeName, publisher);
+                                        dialog.dismiss();
+                                        Toast.makeText(RecipeText.this, recipeName + " successfully deleted", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                dialog.show();
+                            }
+                        });
                     }
                 }
             }
         });
 
-        //get ingredient list and step list from firebase
+
         ingreRef = FirebaseDatabase.getInstance().getReference("recipes_sort_by_username")
                 .child(publisher)
                 .child(recipeName)
@@ -81,6 +120,7 @@ public class RecipeText extends Activity {
                 .child(recipeName)
                 .child("stepArrayList");
 
+        //get ingredient list and step list from firebase
         getIngreListFromDatabase();
         getStepListFromDatabase();
 
@@ -105,6 +145,31 @@ public class RecipeText extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void deleteItem(String recipeName, String publisher) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("recipes_sort_by_recipe_name").child(recipeName).removeValue();
+
+        ref.child("recipes_sort_by_username").child(publisher).child(recipeName).removeValue();
+
+        ref.child("users").child(FirebaseHelper.getCurrUserID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dss : snapshot.getChildren()) {
+
+                    if (dss.hasChild(recipeName)) {
+                        dss.child(recipeName).getRef().removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

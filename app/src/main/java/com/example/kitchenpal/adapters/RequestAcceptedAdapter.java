@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.FirebaseHelper;
@@ -51,10 +52,10 @@ public class RequestAcceptedAdapter extends RecyclerView.Adapter<RequestAccepted
                 Dialog dialog = new Dialog(view.getContext());
                 dialog.setContentView(R.layout.contact_details_dialog);
                 dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
-                dialog.getWindow().setLayout(1000, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.setCancelable(false);
 
-                TextView close = dialog.findViewById(R.id.close_dialog);
+                AppCompatButton close = dialog.findViewById(R.id.close_dialog);
                 TextView username = dialog.findViewById(R.id.contact_username);
                 TextView contact = dialog.findViewById(R.id.contact_details);
 

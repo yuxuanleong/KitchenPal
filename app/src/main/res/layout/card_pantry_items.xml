@@ -31,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-
             android:layout_marginTop="7dp"
             android:text="Item name"
             android:textColor="@color/black"
@@ -52,6 +51,7 @@
             android:text="Condition"
             android:textColor="@color/grey"
             android:textSize="15sp"
+            android:layout_marginTop="-9dp"
             app:layout_constraintStart_toStartOf="@+id/item_name_pantry"
             app:layout_constraintTop_toBottomOf="@+id/item_name_pantry" />
 
@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:text="By User"
+            android:layout_marginTop="-5dp"
             android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/item_name_pantry"

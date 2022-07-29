@@ -58,9 +58,11 @@
         <entry key="app/src/main/res/drawable/round_grey.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_bg.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/search_bar_bg.xml" value="0.267" />
+        <entry key="app/src/main/res/layout-v23/confirm_delete_dialog.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/layout-v23/fragment_add_ingredient.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.2521489971346705" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_recipes_text.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.37552083333333336" />
@@ -74,6 +76,8 @@
         <entry key="app/src/main/res/layout/card_request_pending_accpeted.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/card_requests.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/chat_adapter_layout.xml" value="0.3481277465820312" />
+        <entry key="app/src/main/res/layout/confirm_Del.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/layout/confirm_del.xml" value="0.32135416666666666" />
         <entry key="app/src/main/res/layout/contact_details_dialog.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/dialog_add_ingre.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/layout/fragment_add_ingredient.xml" value="0.4073776245117189" />
@@ -85,7 +89,7 @@
         <entry key="app/src/main/res/layout/fragment_profile_my_recipes.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.3937246251989294" />
         <entry key="app/src/main/res/layout/fragment_recipes_recipeview.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/fragment_requests_accept.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_requests_accept.xml" value="0.36870574951171875" />
         <entry key="app/src/main/res/layout/fragment_requests_accepted.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_requests_pending.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.25" />

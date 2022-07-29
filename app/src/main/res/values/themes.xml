@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/PoppinTextViewStyle</item>
     </style>
 
     <style name="Theme.KitchenPal.Fullscreen" parent="Theme.KitchenPal">
@@ -25,4 +26,10 @@
         <item name="fullscreenBackgroundColor">@color/white</item>
         <item name="fullscreenTextColor">@color/black</item>
     </style>
+
+    <style name="PoppinTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+
 </resources>

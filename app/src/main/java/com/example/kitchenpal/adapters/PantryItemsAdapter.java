@@ -4,18 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kitchenpal.FirebaseHelper;
+import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.PantryItemsModel;
-import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.PantryItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +51,16 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         holder.publisher.setText(publisher);
         holder.itemName.setText(name);
         holder.condition.setText(modelList.get(position).getCondition());
+
+        FirebaseHelper.getCurrUsernameData(new FirebaseSuccessListener() {
+            @Override
+            public void onDataFound(boolean isDataFetched) {
+                String getUsername = FirebaseHelper.getCurrUsername();
+                if(getUsername.equals(publisher)) {
+                    holder.request.setVisibility(View.GONE);
+                }
+            }
+        });
         if (isRequested) {
             holder.request.setVisibility(View.GONE);
         } else {
@@ -61,7 +70,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         holder.request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, name + " requested", Toast.LENGTH_SHORT).show();
                 FirebaseDatabase.getInstance().getReference()
                         .child("users")
                         .child(FirebaseAuth.getInstance()
@@ -72,8 +81,6 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                                 String requesterName = snapshot.child("username").getValue(String.class);
-
-                                Toast.makeText(context, requesterName, Toast.LENGTH_SHORT).show();
 
                                 DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference()
                                         .child("pantry_items_sort_by_item_name")

@@ -1,10 +1,8 @@
 package com.example.kitchenpal.pantryFragment;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kitchenpal.FirebaseHelper;
 import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.R;
-import com.example.kitchenpal.UploadPantryItem;
 import com.example.kitchenpal.adapters.PantryItemsAdapter;
-import com.example.kitchenpal.adapters.RecipesViewerAdapter;
 import com.example.kitchenpal.models.PantryItemsModel;
-import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.PantryItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,10 +88,8 @@ public class PantryFragment extends Fragment {
                                 public void onDataFound(boolean isDataFetched) {
 
                                     if (isDataFetched) {
-                                        Toast.makeText(getActivity(), "contact found", Toast.LENGTH_SHORT).show();
                                         etContact.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(getActivity(), "contact not found", Toast.LENGTH_SHORT).show();
                                         etContact.setVisibility(View.VISIBLE);
                                     }
                                 }
@@ -138,17 +131,7 @@ public class PantryFragment extends Fragment {
                         if (!itemName.isEmpty()) {
                             PantryItem item = new PantryItem(itemName, condition, username);
 
-                            FirebaseDatabase.getInstance().getReference()
-                                    .child("users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child("my_pantry_items")
-                                    .child(itemName)
-                                    .setValue(item);
-
-                            FirebaseDatabase.getInstance().getReference()
-                                    .child("pantry_items_sort_by_item_name")
-                                    .child(itemName)
-                                    .setValue(item);
+                            addPantryItemsToDatabase(item);
 
                             Toast.makeText(getContext(), "Pantry Item uploaded", Toast.LENGTH_SHORT).show();
                             dialogPlus.dismiss();
@@ -198,6 +181,20 @@ public class PantryFragment extends Fragment {
         itemsViewer.setHasFixedSize(true);
 
         return root;
+    }
+
+    private void addPantryItemsToDatabase(PantryItem item) {
+        FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("my_pantry_items")
+                .child(item.getName())
+                .setValue(item);
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("pantry_items_sort_by_item_name")
+                .child(item.getName())
+                .setValue(item);
     }
 
     private void getPantryItemsFromDatabase() {

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/contact_img"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/warning"
+        android:backgroundTint="@color/red" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="30sp"
+        android:textColor="#636363"
+        android:text="Are you sure?"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/contact_username"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/grey"
+            android:textStyle="bold"
+            android:text="Do you really want to delete"/>
+
+        <TextView
+            android:id="@+id/things_to_be_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textStyle="bold"
+            android:text="name" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/grey"
+        android:textStyle="bold"
+        android:text="This process cannot be undone."/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="20dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/del_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginEnd="3dp"
+            android:text="Cancel"
+            android:paddingHorizontal="30dp"
+            android:textAllCaps="false"
+            android:backgroundTint="#C1C1C1"
+            android:layout_marginVertical="15dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/del_dialog_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingHorizontal="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/red"
+            android:layout_marginVertical="15dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

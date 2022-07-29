@@ -18,16 +18,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UploadPantryItem"
-            android:exported="false" />
-        <activity
             android:name=".HandsFreeSteps"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_hands_free_steps"
             android:theme="@style/Theme.KitchenPal.Fullscreen" />
         <activity
-            android:name=".RecipeText"
+            android:name=".recipesFragment.RecipeText"
             android:exported="false" />
         <activity
             android:name=".HomePage"

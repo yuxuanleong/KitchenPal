@@ -61,7 +61,7 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="68dp"
@@ -73,6 +73,7 @@
             android:id="@+id/signUpLink"
             android:layout_width="61dp"
             android:layout_height="24dp"
+            android:layout_marginStart="3dp"
             android:layout_marginBottom="68dp"
             android:text="Sign up"
             android:textColor="@color/green"

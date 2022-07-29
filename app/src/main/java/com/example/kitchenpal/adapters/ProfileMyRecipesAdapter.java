@@ -1,5 +1,6 @@
 package com.example.kitchenpal.adapters;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,21 @@ import android.widget.TextView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kitchenpal.FirebaseHelper;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.ProfileMyRecipeModel;
 import com.example.kitchenpal.recipesFragment.RecipeText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -55,6 +64,66 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
                 context.startActivity(intent);
             }
         });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(view.getContext());
+                dialog.setContentView(R.layout.confirm_del);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
+                dialog.getWindow().setLayout(1050, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(false);
+
+                AppCompatButton del = dialog.findViewById(R.id.del_dialog_del);
+                AppCompatButton cancel = dialog.findViewById(R.id.del_dialog_cancel);
+                TextView itemName = dialog.findViewById(R.id.things_to_be_del);
+
+                itemName.setText(name + "?");
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteItem(name, publisher);
+                        dialog.dismiss();
+                        Toast.makeText(context, name + " successfully deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+    }
+
+    private void deleteItem(String name, String publisher) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("recipes_sort_by_recipe_name").child(name).removeValue();
+
+        ref.child("recipes_sort_by_username").child(publisher).child(name).removeValue();
+
+        ref.child("users").child(FirebaseHelper.getCurrUserID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dss : snapshot.getChildren()) {
+
+                    if (dss.hasChild(name)) {
+                        dss.child(name).getRef().removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -67,6 +136,7 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
         ImageView imageView;
         TextView name;
         TextView publisher;
+        AppCompatButton delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +144,7 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
             imageView = itemView.findViewById(R.id.recipeImage_myrecipe);
             name = itemView.findViewById(R.id.recipeName_myrecipe);
             publisher = itemView.findViewById(R.id.createdBy_myrecipe);
+            delete = itemView.findViewById(R.id.del_recipe_button);
         }
     }
 }

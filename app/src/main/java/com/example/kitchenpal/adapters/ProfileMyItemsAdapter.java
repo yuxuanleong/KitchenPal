@@ -1,18 +1,18 @@
 package com.example.kitchenpal.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.kitchenpal.FirebaseHelper;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.RequestPendingModel;
 import com.google.firebase.database.DataSnapshot;
@@ -52,40 +52,72 @@ public class ProfileMyItemsAdapter extends RecyclerView.Adapter<ProfileMyItemsAd
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Dialog dialog = new Dialog(view.getContext());
+                dialog.setContentView(R.layout.confirm_del);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
+                dialog.getWindow().setLayout(1050, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(false);
 
-                ref.child("/pantry_items_sort_by_item_name").child(name).removeValue();
+                AppCompatButton del = dialog.findViewById(R.id.del_dialog_del);
+                AppCompatButton cancel = dialog.findViewById(R.id.del_dialog_cancel);
+                TextView itemName = dialog.findViewById(R.id.things_to_be_del);
 
-                ref.child("users").child(FirebaseHelper.getCurrUserID()).addValueEventListener(new ValueEventListener() {
+                itemName.setText(name + "?");
+
+                cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dss : snapshot.getChildren()) {
-
-                            if (dss.hasChild(name)) {
-                                dss.child(name).getRef().removeValue();
-                            }
-
-                            for(DataSnapshot dss1 : dss.getChildren()) {
-
-                                if (dss1.hasChild(name)) {
-                                    dss1.child(name).getRef().removeValue();
-                                }
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
+                    public void onClick(View view) {
+                        dialog.dismiss();
                     }
                 });
+
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteItem(name);
+                        dialog.dismiss();
+                        Toast.makeText(context, name + " successfully deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dialog.show();
+
 
             }
         });
 
     }
 
+    private void deleteItem(String itemName) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child("/pantry_items_sort_by_item_name").child(itemName).removeValue();
+
+        ref.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dss : snapshot.getChildren()) {
+
+                    if (dss.hasChild(itemName)) {
+                        dss.child(itemName).getRef().removeValue();
+                    }
+
+                    for(DataSnapshot dss1 : dss.getChildren()) {
+
+                        if (dss1.hasChild(itemName)) {
+                            dss1.child(itemName).getRef().removeValue();
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @Override
     public int getItemCount() {
         return modelList.size();

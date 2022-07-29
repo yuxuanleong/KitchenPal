@@ -21,15 +21,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/del_recipe"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="13dp"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_delete_24" />
+        android:layout_marginEnd="13dp"
+        android:visibility="gone"
+        android:background="@drawable/ic_baseline_delete_24"
+        android:backgroundTint="@color/red" />
 
     <LinearLayout
         android:id="@+id/recipeNameAndPublisher"

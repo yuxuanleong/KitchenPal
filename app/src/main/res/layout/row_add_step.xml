@@ -12,6 +12,7 @@
         android:layout_marginHorizontal="10dp"
         android:paddingEnd="40dp"
         android:paddingStart="10dp"
+        android:textSize="15sp"
         android:background="@drawable/round_grey"
         tools:ignore="RtlSymmetry" />
 

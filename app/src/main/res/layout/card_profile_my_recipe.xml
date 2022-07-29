@@ -40,18 +40,28 @@
             app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.796" />
+            app:layout_constraintVertical_bias="0.830" />
 
         <TextView
             android:id="@+id/createdBy_myrecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
             android:text="By User"
+            android:layout_marginTop="-10dp"
             android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/recipeName_myrecipe"
             app:layout_constraintTop_toBottomOf="@+id/recipeName_myrecipe" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/del_recipe_button"
+            android:layout_width="38dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

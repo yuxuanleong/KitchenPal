@@ -40,7 +40,7 @@
             app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.796" />
+            app:layout_constraintVertical_bias="0.830" />
 
         <TextView
             android:id="@+id/createdBy"
@@ -50,6 +50,7 @@
             android:text="By User"
             android:textColor="@color/grey"
             android:textSize="15sp"
+            android:layout_marginTop="-10dp"
             app:layout_constraintStart_toStartOf="@+id/recipeName"
             app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
