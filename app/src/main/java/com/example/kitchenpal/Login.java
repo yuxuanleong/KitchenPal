@@ -18,21 +18,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class Login extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private TextView signup;
     private Button loginBtn;
     private EditText etEmail, etPassword;
+
+    public void setmAuth (FirebaseAuth auth) {
+        this.mAuth = auth;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        mAuth = FirebaseAuth.getInstance();
-//        if (mAuth.getCurrentUser() != null) {
-//            finish();
-//            return;
-//        }
 
         signup = findViewById(R.id.signUpLink);
         signup.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,7 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    private void authenticateUser(String loginEmail, String loginPw) {
+    public void authenticateUser(String loginEmail, String loginPw) {
         if (loginEmail.isEmpty() || loginPw.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         }
