@@ -1,49 +1,30 @@
 package com.example.kitchenpal;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+
 import android.annotation.SuppressLint;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowInsets;
-
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
-
-import static android.Manifest.permission.RECORD_AUDIO;
-import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
-
-import com.example.kitchenpal.databinding.ActivityHandsFreeStepsBinding;
-
-import org.w3c.dom.Text;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -237,6 +218,7 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     @SuppressLint("SetTextI18n")
     public void toggleNext(View view) {
         this.currStep++;
+        setButtonsVisibility();
         stepNum.setText("Step " + String.valueOf(currStep + 1));
         if (!(currStep > steps.size() - 1)) {
             textView.setText(steps.get(currStep));
@@ -247,6 +229,7 @@ public class HandsFreeSteps extends AppCompatActivity implements RecognitionList
     @SuppressLint("SetTextI18n")
     public void toggleBack(View view) {
         this.currStep--;
+        setButtonsVisibility();
         stepNum.setText("Step " + String.valueOf(currStep + 1));
         if(!(currStep < 0)) {
             textView.setText(steps.get(currStep));
