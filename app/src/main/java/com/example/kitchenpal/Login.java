@@ -20,8 +20,8 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private TextView signup;
-    private Button loginBtn;
-    private EditText etEmail, etPassword;
+    public Button loginBtn;
+    public EditText etEmail, etPassword;
 
     public void setmAuth (FirebaseAuth auth) {
         this.mAuth = auth;
@@ -49,7 +49,12 @@ public class Login extends AppCompatActivity {
 
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
-                checkExistingUserAndLogin(email, password);
+
+                if(email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(Login.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    checkExistingUserAndLogin(email, password);
+                }
             }
         });
     }

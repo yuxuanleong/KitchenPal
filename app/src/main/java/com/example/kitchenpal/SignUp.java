@@ -22,8 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUp extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
-    private EditText etUsername, etEmail, etPassword, etReenterPassword;
-    private TextView loginLink, signup;
+    public EditText etUsername, etEmail, etPassword, etReenterPassword;
+    public TextView loginLink, signup;
 
 
     @Override

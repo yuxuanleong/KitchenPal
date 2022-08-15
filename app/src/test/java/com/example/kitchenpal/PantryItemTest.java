@@ -2,6 +2,7 @@ package com.example.kitchenpal;
 
 import static org.junit.Assert.*;
 
+import com.example.kitchenpal.helper.Methods;
 import com.example.kitchenpal.objects.PantryItem;
 
 import org.junit.Test;
