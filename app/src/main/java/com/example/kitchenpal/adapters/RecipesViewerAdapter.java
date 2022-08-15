@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -20,6 +19,8 @@ import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.RecipesViewerModel;
 import com.example.kitchenpal.objects.Recipe;
 import com.example.kitchenpal.recipesFragment.RecipeText;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,10 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FilterReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdapter.ViewHolder> implements Filterable {
     Context context;
@@ -105,7 +104,13 @@ public class RecipesViewerAdapter extends RecyclerView.Adapter<RecipesViewerAdap
                             .child("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .child("favourites")
-                            .child(name).removeValue();
+                            .child(name).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    listModels.remove(listModels.get(position));
+                                    notifyDataSetChanged();
+                                }
+                            });
                 }
             }
         });

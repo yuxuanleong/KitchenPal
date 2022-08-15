@@ -1,5 +1,6 @@
 package com.example.kitchenpal.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String name = modelList.get(position).getItemName();
         String publisher = modelList.get(position).getPublisher();
         boolean isRequested = modelList.get(position).isRequested();

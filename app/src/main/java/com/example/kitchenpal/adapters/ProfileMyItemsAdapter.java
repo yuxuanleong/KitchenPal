@@ -1,5 +1,6 @@
 package com.example.kitchenpal.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.RequestPendingModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +43,7 @@ public class ProfileMyItemsAdapter extends RecyclerView.Adapter<ProfileMyItemsAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String name = modelList.get(position).getItemName();
         String publisher = modelList.get(position).getPublisher();
 
@@ -74,7 +77,7 @@ public class ProfileMyItemsAdapter extends RecyclerView.Adapter<ProfileMyItemsAd
                 del.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        deleteItem(name);
+                        deleteItem(name, position);
                         dialog.dismiss();
                         Toast.makeText(context, name + " successfully deleted", Toast.LENGTH_SHORT).show();
                     }
@@ -88,10 +91,16 @@ public class ProfileMyItemsAdapter extends RecyclerView.Adapter<ProfileMyItemsAd
 
     }
 
-    private void deleteItem(String itemName) {
+    private void deleteItem(String itemName, int position) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("/pantry_items_sort_by_item_name").child(itemName).removeValue();
+        ref.child("/pantry_items_sort_by_item_name").child(itemName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                modelList.remove(modelList.get(position));
+                notifyDataSetChanged();
+            }
+        });
 
         ref.child("users").addValueEventListener(new ValueEventListener() {
             @Override

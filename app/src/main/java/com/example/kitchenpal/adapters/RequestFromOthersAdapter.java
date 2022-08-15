@@ -1,5 +1,6 @@
 package com.example.kitchenpal.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.example.kitchenpal.FirebaseSuccessListener;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.RequestFromOthersModel;
 import com.example.kitchenpal.objects.PantryItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,7 +46,7 @@ public class RequestFromOthersAdapter extends RecyclerView.Adapter<RequestFromOt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String name = modelList.get(position).getItemName();
         String requester = modelList.get(position).getRequester();
         Integer image = modelList.get(position).getImage();
@@ -64,7 +67,13 @@ public class RequestFromOthersAdapter extends RecyclerView.Adapter<RequestFromOt
                         .child("request_from_others")
                         .child(requester)
                         .child(name)
-                        .removeValue();
+                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                modelList.remove(modelList.get(position));
+                                notifyDataSetChanged();
+                            }
+                        });
 
                 findRequesterUID(requester, new FirebaseSuccessListener() {
                     @Override

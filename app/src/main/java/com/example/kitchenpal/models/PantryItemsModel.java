@@ -35,4 +35,7 @@ public class PantryItemsModel {
     public boolean isRequested() {
         return isRequested;
     }
+
+    public void setCondition(boolean b) {
+    }
 }

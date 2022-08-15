@@ -1,15 +1,14 @@
 package com.example.kitchenpal.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +19,8 @@ import com.example.kitchenpal.FirebaseHelper;
 import com.example.kitchenpal.R;
 import com.example.kitchenpal.models.ProfileMyRecipeModel;
 import com.example.kitchenpal.recipesFragment.RecipeText;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,7 +91,7 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
                 del.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        deleteItem(name, publisher);
+                        deleteItem(name, publisher, position);
                         dialog.dismiss();
                         Toast.makeText(context, name + " successfully deleted", Toast.LENGTH_SHORT).show();
                     }
@@ -101,10 +102,16 @@ public class ProfileMyRecipesAdapter extends RecyclerView.Adapter<ProfileMyRecip
         });
     }
 
-    private void deleteItem(String name, String publisher) {
+    private void deleteItem(String name, String publisher, int position) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("recipes_sort_by_recipe_name").child(name).removeValue();
+        ref.child("recipes_sort_by_recipe_name").child(name).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                list.remove(list.get(position));
+                notifyDataSetChanged();
+            }
+        });
 
         ref.child("recipes_sort_by_username").child(publisher).child(name).removeValue();
 
