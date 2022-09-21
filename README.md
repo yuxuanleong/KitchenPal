@@ -1,6 +1,11 @@
 # KitchenPal
 An all-in-one baking and cooking app that will be your best pal in the kitchen!
 
+## Features
+- View recipes in plain-text mode
+- View recipes in hands-free mode
+- Pantry (where users post/request ingredients)
+
 ## Instructions to run the app
 **Prerequisites**
 * Android Phone[^1]
@@ -10,7 +15,7 @@ An all-in-one baking and cooking app that will be your best pal in the kitchen!
 1. Go to **File > New > Project from Version Control...**
 2. In the pop-up screen, for the **Version control**, choose **Git** from the dropdown menu.
 3. Paste the following link (https://github.com/callyanne/KitchenPal.git) in **URL** and choose your **Directory**.
-4. CLick on the **CLone**.
+4. CLick on the **Clone**.
 
 ### Running the app
 #### Running app in virtual devices
@@ -22,7 +27,7 @@ An all-in-one baking and cooking app that will be your best pal in the kitchen!
 5. Click **Finish**
 6. Go to **Run > Run 'app'**
 
-#### - Running app on a hardware device
+#### Running app on a hardware device
 1. On the device, open **Settings** and select **Developer options**, then enable **USB debugging**
 >Note: If you do not see **Developer options** follow the [instructions](https://developer.android.com/studio/debug/dev-options) to enable it.
 2. Connect to your device using USB
