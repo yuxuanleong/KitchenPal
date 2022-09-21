@@ -8,7 +8,7 @@
 1. Go to **File > New > Project from Version Control...**
 2. In the pop-up screen, for the **Version control**, choose **Git** from the dropdown menu.
 3. Paste the following link (https://github.com/callyanne/KitchenPal.git) in **URL** and choose your **Directory**.
-4. CLick on the **CLone**.
+4. CLick on the **Clone**.
 
 ## Running the app
 ### Running app in virtual devices
@@ -28,3 +28,7 @@
 4. After the app shows on your device, you can choose to unplug the USB for your convenience
 
 [^1]: A hardware device is needed to test the voice commands in Hands-free mode
+
+**Contributors**
+- [@yuxuanleong](https://github.com/yuxuanleong)
+- [@callyanne](https://github.com/callyanne)
