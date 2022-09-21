@@ -29,6 +29,6 @@
 
 [^1]: A hardware device is needed to test the voice commands in Hands-free mode
 
-**Contributors**
+## **Contributors**
 - [@yuxuanleong](https://github.com/yuxuanleong)
 - [@callyanne](https://github.com/callyanne)
