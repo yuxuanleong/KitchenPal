@@ -1,10 +1,14 @@
 # KitchenPal
 An all-in-one baking and cooking app that will be your best pal in the kitchen!
 
-## Features
+## Key Features
 - View recipes in plain-text mode
-- View recipes in hands-free mode
+- View recipes in hands-free mode (voice command)
 - Pantry (where users post/request ingredients)
+
+<img src=docs/login.png width="auto" height="400">
+
+Click for [demo video](https://drive.google.com/file/d/198BfKLk_gZoMdmMQp07NHUWqhE8yIv2d/view?usp=sharing)!
 
 ## Instructions to run the app
 **Prerequisites**
